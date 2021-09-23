@@ -9,10 +9,62 @@ const etiquietas = document.getElementById("etiquetas");
 //
 document.addEventListener("DOMContentLoaded", () =>
 {
+    fixedNav();
+    onAnimateSummary();
     loadMap();
     formEvent();
     tallerHandler();
-})
+});
+
+
+function fixedNav()
+{
+    const last_element = document.querySelector("header"); // Elemento anterior al elemento que queremos fijar
+    const fixed_element = document.querySelector(".bar"); // Elemento que queremos fijar
+    
+    // Cada vez que el observe cambia
+    const observer = new IntersectionObserver(entries => 
+    {
+        if(!entries[0].isIntersecting) // last_element no está visible en la vista
+        {
+            last_element.style.marginBottom = `${fixed_element.offsetHeight}px`;
+            fixed_element.classList.add("bar-fixed"); // Fijamos el elemento en la vista
+        }
+        else // last_element está visible
+        {
+            last_element.style.marginBottom = "0";
+            fixed_element.classList.remove("bar-fixed"); // Desfijamos el elemento
+        }
+    });
+    observer.observe(last_element); // Le decimos al observer que observe por el "last_element"
+}
+
+
+function onAnimateSummary()
+{
+    let animated = false;
+
+    const observer = new IntersectionObserver(entries =>
+    {
+        // Verificar si ya se animaron los números
+        if(animated) return;
+
+        // Animar numeros cuando estén en la vista
+        if(entries[0].isIntersecting)
+        {
+            $(".summary-hero .summary div:nth-child(1) .summary-n").animateNumber({number: 6}, 1000);
+            $(".summary-hero .summary div:nth-child(2) .summary-n").animateNumber({number: 15}, 1500);
+            $(".summary-hero .summary div:nth-child(3) .summary-n").animateNumber({number: 3}, 1000);
+            $(".summary-hero .summary div:nth-child(4) .summary-n").animateNumber({number: 9}, 1200);
+            animated = true;
+        }
+    })
+
+    const element = document.querySelector(".summary-t");
+    observer.observe(element);
+}
+
+
 
 function formEvent()
 {
@@ -104,7 +156,41 @@ function loadMap()
     L.marker(coords).addTo(map)
         .bindPopup('GDLWEBCAPM 2021<br>Boletos ya disponibles!')
         .openPopup()
-        .bindTooltip("GDLWEBCAMP 2021")
-        .openTooltip();
+        .bindTooltip("GDLWEBCAMP 2021");
 
 }
+
+
+
+
+
+$(function()
+{
+    // Programa
+    $(".pcard-info").hide(); // Ocultar todos los .pcard-info
+    $(".pcard-info:first").show(); // Selecciona el primer .pcard-info y lo muestra (default)
+    $(".pcard-links a:first").addClass("pcard-link__active");
+
+    // Cuando el usuario haga click en un enlace
+    $(".pcard-links a").on("click", function() 
+    {
+        $(".pcard-links a").removeClass("pcard-link__active");
+        $(".pcard-info").hide(); // Buscar todos los ".pcard-info" y ocultarlos
+
+
+        let link = $(this).attr("href"); // Obtener el href del enlace presionado
+        $(this).addClass("pcard-link__active");
+        $(link).fadeIn(500); // Mostrar el card presionado
+        return false;
+    });
+
+
+    // Countdown
+    $(".countdown").countdown("2022/01/01 00:00:00", function(e) // Fecha en la que ocurrirá el evento
+    {
+        $("#countdown-d").html(e.strftime("%D")); // Asiganamos el conteo de días al elemento p#countdown-d
+        $("#countdown-h").html(e.strftime("%H")); // ...
+        $("#countdown-m").html(e.strftime("%M"));
+        $("#countdown-s").html(e.strftime("%S"));
+    });
+});
