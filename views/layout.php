@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#353535">
         
-        <!--  -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=Oswald:wght@300;500;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -13,9 +12,9 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/fontawesome.min.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <link rel="stylesheet" href="css/lightbox.css">
         <link rel="stylesheet" href="css/layout.css">
 
-        <!--  -->
         <title>GDLWEBCAMP</title>
     </head>
 
@@ -41,7 +40,6 @@
             </div>
         </header>
 
-        <!-- BARRA -->
         <div class="bar">
             <div class="container">
                 <a href="/">
@@ -49,48 +47,18 @@
                 </a>
 
                 <div class="bar-nav">
-                    <a href="conferencia.html">Conferencia</a>
+                    <a href="/conferencia">Conferencia</a>
                     <a href="#">Calendario</a>
                     <a href="#">Invitados</a>
-                    <a href="registro.html">Reservaciones</a>
+                    <a href="/reservaciones">Reservaciones</a>
                 </div>
             </div>
         </div>
 
-
-        <!-- CONTENT -->
         <!--  -->
-        <section class="container section">
-            <h2 class="section-h">Galería de fotos</h2>
+        <?php echo $content; ?>
+        <!--  -->
 
-            <div class="gallery">
-                <a href="img/galeria/01.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/01.jpg" alt="foto 1"></a>
-                <a href="img/galeria/02.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/02.jpg" alt="foto 1"></a>
-                <a href="img/galeria/03.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/03.jpg" alt="foto 1"></a>
-                <a href="img/galeria/04.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/04.jpg" alt="foto 1"></a>
-                <a href="img/galeria/05.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/05.jpg" alt="foto 1"></a>
-                <a href="img/galeria/06.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/06.jpg" alt="foto 1"></a>
-                <a href="img/galeria/07.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/07.jpg" alt="foto 1"></a>
-                <a href="img/galeria/08.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/08.jpg" alt="foto 1"></a>
-                <a href="img/galeria/09.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/09.jpg" alt="foto 1"></a>
-                <a href="img/galeria/10.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/10.jpg" alt="foto 1"></a>
-                <a href="img/galeria/11.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/11.jpg" alt="foto 1"></a>
-                <a href="img/galeria/12.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/12.jpg" alt="foto 1"></a>
-                <a href="img/galeria/13.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/13.jpg" alt="foto 1"></a>
-                <a href="img/galeria/14.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/14.jpg" alt="foto 1"></a>
-                <a href="img/galeria/15.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/15.jpg" alt="foto 1"></a>
-                <a href="img/galeria/16.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/16.jpg" alt="foto 1"></a>
-                <a href="img/galeria/17.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/17.jpg" alt="foto 1"></a>
-                <a href="img/galeria/18.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/18.jpg" alt="foto 1"></a>
-                <a href="img/galeria/19.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/19.jpg" alt="foto 1"></a>
-                <a href="img/galeria/20.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/20.jpg" alt="foto 1"></a>
-                <a href="img/galeria/21.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/21.jpg" alt="foto 1"></a>
-            </div>
-        </section>
-        <!-- END-OF-CONTENT -->
-
-        
-        <!-- FOOTER -->
         <footer class="footer">
             <div class="container">
                 <div class="footer-card">
@@ -120,6 +88,7 @@
         <!--  -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="js/lightbox.js"></script>
         <script src="js/animateNumber.js"></script>
         <script src="js/countdown.js"></script>
         <script src="js/main.js"></script>
