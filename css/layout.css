@@ -1,3 +1,4 @@
+/* GLOBALES */
 html
 {
     box-sizing: border-box;   
@@ -14,7 +15,7 @@ body
 .container
 {
     width: 95%;
-    max-width: 80rem;
+    max-width: 75rem; /* 1200px */
     margin: 0 auto;
 }
 .section
@@ -25,6 +26,11 @@ body
 
 h1 { font-family: 'PT Sans', sans-serif; }
 h2 { font-family: 'Oswald', sans-serif; }
+a
+{
+    text-decoration: none;
+    line-height: normal;
+}
 
 
 /* HEADER */
@@ -52,7 +58,6 @@ h2 { font-family: 'Oswald', sans-serif; }
 {
     padding: .6rem;
     color: white;
-    text-decoration: none;
     font-size: 2rem;
 
     border-radius: 50%;
@@ -77,8 +82,9 @@ h2 { font-family: 'Oswald', sans-serif; }
     display: flex;
     justify-content: space-between;
 }
-.event-info__icons p
+.event-info__icons p, .event-info__icons a
 {
+    color: white;
     text-transform: uppercase;
     margin: 0;
     font-size: 1.2rem;
@@ -98,7 +104,6 @@ h2 { font-family: 'Oswald', sans-serif; }
 .event-name a 
 {
     color: white;
-    text-decoration: none; 
 }
 .event-slogan
 {
@@ -153,7 +158,6 @@ h2 { font-family: 'Oswald', sans-serif; }
     font-size: 1.6rem;
     font-weight: lighter;
     text-align: center;
-    text-decoration: none;
     text-transform: uppercase;
     border-radius: 6px;
     transition: all .2s ease;
@@ -288,7 +292,6 @@ h2 { font-family: 'Oswald', sans-serif; }
     color: white;
     text-align: center;
     font-weight: bold;
-    text-decoration: none;
     border-bottom: 1px solid black;
     transition: background-color .2s ease;
 }
@@ -350,7 +353,6 @@ h2 { font-family: 'Oswald', sans-serif; }
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
-    text-decoration: none;
     transition: color .2s ease;
 }
 .pcard-button a:hover 
@@ -438,7 +440,7 @@ h2 { font-family: 'Oswald', sans-serif; }
 .summary-hero
 {
     position: relative;
-    height: 20rem;
+    height: 25rem;
 
     display: flex;
     align-items: center;
@@ -461,7 +463,7 @@ h2 { font-family: 'Oswald', sans-serif; }
 }
 .summary-n
 {
-    margin: 0 0 1rem;
+    margin: 0;
     color: #fe4918;
     font-size: 5rem;
     font-weight: lighter;
@@ -480,7 +482,8 @@ h2 { font-family: 'Oswald', sans-serif; }
     font-weight: 600;
 }
 .countdown .summary-t 
-{ 
+{
+    font-weight: 600;
     color: black; 
 }
 
@@ -514,7 +517,6 @@ h2 { font-family: 'Oswald', sans-serif; }
     padding: 0rem 3rem;
     background-color: white;
     color: black;
-    text-decoration: none;
     max-width: max-content;
     overflow: hidden;
 
@@ -522,7 +524,7 @@ h2 { font-family: 'Oswald', sans-serif; }
     border-radius: 8px;
     transition: transform .2s ease, border .2s ease;
 }
-section > div > .price:hover /* /index */
+section > div > .price:hover /* solo funciona en /index */
 {
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
@@ -599,7 +601,7 @@ fieldset > div > .price:hover { border: 1px solid #fe4918; } /* /registro */
 }
 .testimonial-text::before
 {
-    content: "\201c";
+    content: "\201c"; /* símbolo de comillas */
     position: absolute;
     top: 2rem;
     left: -6px;
@@ -667,14 +669,13 @@ fieldset > div > .price:hover { border: 1px solid #fe4918; } /* /registro */
 .newsletter h3
 {
     margin: 1rem 0;
-    font-size: 6rem;
+    font-size: clamp(4rem, 10vw, 8rem);
     text-transform: uppercase;
 }
 .newsletter a
 {
     margin: 1rem 0;
     color: white;
-    text-decoration: none;
     font-size: 1.6rem;
     font-weight: lighter;
     border: 2px solid white;

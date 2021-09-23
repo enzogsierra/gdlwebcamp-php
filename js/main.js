@@ -9,14 +9,15 @@ const etiquietas = document.getElementById("etiquetas");
 //
 document.addEventListener("DOMContentLoaded", () =>
 {
-    fixedNav();
-    onAnimateSummary();
-    loadMap();
-    formEvent();
-    tallerHandler();
+    fixedNav(); // Controla el comportamiento del .bar
+    onAnimateSummary(); // Anima los números en la seccion .summary
+    loadMap(); // Carga el mapa leaflet
+    formEvent(); // Calcula los precios (/registro.html)
+    tallerHandler(); // Controla los talleres que se muestran (/registro.html)
 });
 
 
+//
 function fixedNav()
 {
     const last_element = document.querySelector("header"); // Elemento anterior al elemento que queremos fijar
@@ -40,10 +41,13 @@ function fixedNav()
 }
 
 
+//
 function onAnimateSummary()
 {
-    let animated = false;
+    const element = document.querySelector(".summary-t");
+    if(!element) return;
 
+    let animated = false;
     const observer = new IntersectionObserver(entries =>
     {
         // Verificar si ya se animaron los números
@@ -59,13 +63,11 @@ function onAnimateSummary()
             animated = true;
         }
     })
-
-    const element = document.querySelector(".summary-t");
     observer.observe(element);
 }
 
 
-
+//
 function formEvent()
 {
     if(!document.querySelector(".form")) return 1;
@@ -141,12 +143,14 @@ function tallerHandlerEx(taller, value)
     else p.classList.remove("display-none");
 }
 
+
+//
 function loadMap()
 {
     if(!document.getElementById("map")) return;
 
-    let coords = [-34.65523, -58.526144];
-    let map = L.map('map').setView(coords, 20);
+    let coords = [-34.65523, -58.526144]; // Coordenadas
+    let map = L.map('map').setView(coords, 20); // 20 = zoom
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
     {
@@ -161,22 +165,20 @@ function loadMap()
 }
 
 
-
-
-
+//
 $(function()
 {
-    // Programa
+    // Programa del evento
     $(".pcard-info").hide(); // Ocultar todos los .pcard-info
     $(".pcard-info:first").show(); // Selecciona el primer .pcard-info y lo muestra (default)
     $(".pcard-links a:first").addClass("pcard-link__active");
 
-    // Cuando el usuario haga click en un enlace
+
+    // Cuando el usuario haga click en talleres/conferencias/seminarios
     $(".pcard-links a").on("click", function() 
     {
         $(".pcard-links a").removeClass("pcard-link__active");
         $(".pcard-info").hide(); // Buscar todos los ".pcard-info" y ocultarlos
-
 
         let link = $(this).attr("href"); // Obtener el href del enlace presionado
         $(this).addClass("pcard-link__active");
