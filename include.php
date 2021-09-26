@@ -1,5 +1,17 @@
 <?php
 require __DIR__ . "/vendor/autoload.php";
+use Model\ActiveRecord;
+
+
+// Conectar a la base de datos
+function dbConnect(): mysqli
+{
+    $db = new mysqli("localhost", "root", "root", "gdlwebcamp");
+    if(!$db) debug("Error al conectar a la db");
+    return $db;
+}
+$db = dbConnect();
+ActiveRecord::setDB($db);
 
 
 // Hacer debug a una variable

@@ -866,9 +866,103 @@ fieldset > div > .price:hover { border: 1px solid #fe4918; } /* /registro */
     
 }
 
+/* CALENDARIO */
+.calendars-hero
+{
+    border: 2px solid #e1e1e1;
+}
+
+.calendars
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    font-weight: bold;
+    text-align: center;
+}
+.calendar
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.4rem;
+    
+    padding: 1rem;
+    background-color: #f2f2f2;
+    border: 2px solid transparent;
+    border-right: 2px solid #e1e1e1;
+    border-bottom: 2px solid #e1e1e1;
+    transition: background-color .2s ease, transform .2s ease, border .2s ease;
+}
+.calendar:hover
+{
+    background-color: #e1e1e1;
+    border: 2px solid transparent;
+    transform: scale(1.06);
+}
+
+.calendar-header
+{
+    margin: 0;
+    padding: 1rem;
+    
+    background-color: #fe4918;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+}
+.calendar p 
+{ 
+    margin: 0; 
+}
+.calendar-title
+{
+    padding: .2rem 0;
+    color: #fe4918;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+.calendar-category
+{
+    display: block;
+    color: grey;
+}
+
+@media(min-width: 992px)
+{
+    .calendar:nth-child(3n) { border-right: none; } /* 3ra columna */
+    .calendar:nth-last-child(-n + 3):nth-child(3n + 1), /* Primer elemento de la última fila */
+    .calendar:nth-last-child(-n + 3):nth-child(3n + 1) ~ .calendar /* Elementos que le siguen */
+    {
+        border-bottom: none;
+    }
+}
+@media(max-width: 992px)
+{
+    .calendars { grid-template-columns: repeat(2, 1fr); }
+    .calendar 
+    { 
+        border: 2px solid transparent;
+        border-bottom: 2px solid #e1e1e1;
+    }
+    .calendar:nth-child(odd) { border-right: 2px solid #e1e1e1; } 
+    .calendar:nth-last-child(-n + 2):nth-child(2n + 1),
+    .calendar:nth-last-child(-n + 2):nth-child(2n + 1) ~ .calendar
+    {
+        border-bottom: none;
+    }
+}
+@media(max-width: 480px)
+{
+    .calendars { grid-template-columns: 1fr; }
+    .calendar
+    {
+        border: 2px solid transparent;
+        border-bottom: 2px solid #e1e1e1;
+    }
+}
 
 
 /* HELPERS */
 .display-none { display: none; }
-
 .color-orange { color: #fe4918; }

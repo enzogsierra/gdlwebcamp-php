@@ -48,7 +48,7 @@
 
                 <div class="bar-nav">
                     <a href="/conferencia">Conferencia</a>
-                    <a href="#">Calendario</a>
+                    <a href="/calendario">Calendario</a>
                     <a href="#">Invitados</a>
                     <a href="/reservaciones">Reservaciones</a>
                 </div>
