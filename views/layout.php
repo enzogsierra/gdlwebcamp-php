@@ -12,8 +12,11 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/fontawesome.min.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        <link rel="stylesheet" href="css/lightbox.css">
         <link rel="stylesheet" href="css/layout.css">
+
+        <?php 
+            if(isset($load_file)) echo "<link rel='stylesheet' href='css/${load_file}.css'>";
+        ?>
 
         <title>GDLWEBCAMP</title>
     </head>
@@ -49,7 +52,7 @@
                 <div class="bar-nav">
                     <a href="/conferencia">Conferencia</a>
                     <a href="/calendario">Calendario</a>
-                    <a href="#">Invitados</a>
+                    <a href="/invitados">Invitados</a>
                     <a href="/reservaciones">Reservaciones</a>
                 </div>
             </div>
@@ -88,9 +91,12 @@
         <!--  -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-        <script src="js/lightbox.js"></script>
         <script src="js/animateNumber.js"></script>
         <script src="js/countdown.js"></script>
         <script src="js/main.js"></script>
+
+        <?php 
+            if(isset($load_file)) echo "<script src='js/${load_file}.js'></script>";
+        ?>
     </body>
 </html>

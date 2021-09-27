@@ -1,3 +1,5 @@
+<div bar-nav="/calendario"></div>
+
 <section class="container section">
     <h2 class="section-h">Calendario de eventos</h2>
 

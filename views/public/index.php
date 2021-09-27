@@ -77,32 +77,9 @@
 <section class="container section">
     <h2 class="section-h">Nuestros invitados</h2>
 
-    <div class="guests">
-        <div class="guest">
-            <img src="/img/invitado1.jpg" alt="invitado 1" loading="lazy">
-            <p>Rafel Bautista</p>
-        </div>
-        <div class="guest">
-            <img src="/img/invitado2.jpg" alt="invitado 2" loading="lazy">
-            <p>Shari Herrera</p>
-        </div>
-        <div class="guest">
-            <img src="/img/invitado3.jpg" alt="invitado 3" loading="lazy">
-            <p>Gregorio Sanchez</p>
-        </div>
-        <div class="guest">
-            <img src="/img/invitado4.jpg" alt="invitado 4" loading="lazy">
-            <p>Susana Rivera</p>
-        </div>
-        <div class="guest">
-            <img src="/img/invitado5.jpg" alt="invitado 5" loading="lazy">
-            <p>Harold Garcia</p>
-        </div>
-        <div class="guest">
-            <img src="/img/invitado6.jpg" alt="invitado 6" loading="lazy">
-            <p>Susan Sanchez</p>
-        </div>
-    </div>
+    <?php
+        include "_invitados.php"; 
+    ?>
 </section>
 
 

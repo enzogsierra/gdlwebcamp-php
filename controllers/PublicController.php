@@ -10,23 +10,18 @@ class PublicController
 {
     public static function index(Router $router)
     {
-        if($_SERVER["REQUEST_METHOD"] === "POST")
-        {
-        }
-
         $router->render("public/index",
         [
+            "load_file" => "colorbox",
+            "guests" => Invitado::all()
         ]);
     }
 
     public static function conferencia(Router $router)
     {
-        if($_SERVER["REQUEST_METHOD"] === "POST")
-        {
-        }
-
         $router->render("public/conferencia", 
         [
+            "load_file" => "lightbox"
         ]);
     }
 
@@ -52,12 +47,17 @@ class PublicController
         ]);
     }
 
+    public static function invitados(Router $router)
+    {
+        $router->render("public/invitados",
+        [
+            "load_file" => "colorbox",
+            "guests" => Invitado::all()
+        ]);
+    }
+
     public static function reservaciones(Router $router)
     {
-        if($_SERVER["REQUEST_METHOD"] === "POST")
-        {
-        }
-
         $router->render("public/reservaciones", 
         [
         ]);

@@ -168,6 +168,15 @@ function loadMap()
 //
 $(function()
 {
+    // Verificar enlace activo
+    const active_link = document.querySelector('div[bar-nav]'); // Buscar por el div con el atributo "bar-nav"
+    if(active_link)
+    {
+        const att = active_link.getAttribute("bar-nav"); // Extraer el texto del atributo "bar-nav"
+        const nav = document.querySelector(`.bar-nav a[href="${att}"]`); // Buscar por el enlace que su href sea igual al texto del atributo "bar-nav"
+        if(nav) nav.classList.add("bar-nav__active"); // Añadir la clase de link activo
+    }
+
     // Programa del evento
     $(".pcard-info").hide(); // Ocultar todos los .pcard-info
     $(".pcard-info:first").show(); // Selecciona el primer .pcard-info y lo muestra (default)
@@ -195,4 +204,12 @@ $(function()
         $("#countdown-m").html(e.strftime("%M"));
         $("#countdown-s").html(e.strftime("%S"));
     });
+
+
+    // Colorbox
+    try
+    {
+        $(".guest-info").colorbox({inline: true, width: "40%"});
+    }
+    catch {}
 });

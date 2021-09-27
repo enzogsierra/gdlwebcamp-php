@@ -1,3 +1,5 @@
+<div bar-nav="/conferencia"></div>
+
 <section class="container section">
     <h2 class="section-h">Galería de fotos</h2>
 
