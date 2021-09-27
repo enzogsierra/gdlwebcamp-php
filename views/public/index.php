@@ -7,13 +7,38 @@
         <div class="pcard">
             <h3 class="pcard-header">Programa del evento</h3>
 
+            <!-- links -->
             <div class="pcard-links">
+                <?php foreach($categories as $category): ?>
+                    <a href="#<?php echo $category->titulo; ?>">
+                        <span class="color-orange fa <?php echo $category->icono; ?>"></span> 
+                        <?php echo $category->titulo; ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- categorias -->
+            <?php foreach($categories as $category): ?>
+                <div class="pcard-info" id="<?php echo $category->titulo; ?>">
+                    <!-- mostrar 2 eventos -->
+                    <?php foreach($program[$category->titulo] as $event): ?>
+                        <div>
+                            <h4><?php echo $event["titulo"]; ?></h4>
+                            <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> <?php echo $event["fecha"]; ?></p>
+                            <p><span class="far fa-clock color-orange" title="Horario"></span> <?php echo $event["hora"]; ?></p>
+                            <p><span class="fas fa-user color-orange" title="Invitado"></span> <?php echo $event["nombre"] . " " . $event["apellido"]; ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endforeach; ?>
+
+            <!-- <div class="pcard-links">
                 <a href="#talleres"><span class="fa fa-code color-orange"></span> Talleres</a>
                 <a href="#conferencias"><span class="fa fa-comment color-orange"></span> Conferecias</a>
                 <a href="#seminarios"><span class="fa fa-university color-orange"></span> Seminarios</a>
             </div>
 
-            <!-- INFO -->
+            <-- INFO --
             <div class="pcard-info" id="talleres">
                 <div>
                     <h4>HTML5, CSS3 y JavaScript</h4>
@@ -57,7 +82,7 @@
                     <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> 12 de Diciembre</p>
                     <p><span class="fas fa-user color-orange" title="Profesor"></span> Susana Rivero</p>
                 </div>
-            </div>
+            </div> -->
 
             <div class="pcard-button">
                 <a href="#">ver todos</a> 

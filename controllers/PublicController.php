@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Model\ActiveRecord;
 use MVC\Router;
 use Model\Evento;
 use Model\Categoria;
@@ -10,9 +11,22 @@ class PublicController
 {
     public static function index(Router $router)
     {
+        $program = [];
+        $categories = Categoria::all();
+        foreach($categories as $category) // Iterar sobre cada categoría
+        {
+            $id = $category->id;
+            $query = "SELECT eventos.titulo, fecha, hora, categoriaId, invitados.nombre, invitados.apellido FROM eventos ";
+            $query .= "INNER JOIN invitados ON eventos.invitadoId = invitados.id ";
+            $query .= "WHERE categoriaId = '${id}' LIMIT 2";
+            $program[$category->titulo] = ActiveRecord::queryEx($query);
+        }
+
         $router->render("public/index",
         [
             "load_file" => "colorbox",
+            "categories" => $categories,
+            "program" => $program,
             "guests" => Invitado::all()
         ]);
     }
@@ -32,7 +46,7 @@ class PublicController
         $query .= "INNER JOIN invitados ON eventos.invitadoId = invitados.id ";
         $query .= "INNER JOIN categorias ON eventos.categoriaId = categorias.id ";
         $query .= "ORDER BY hora";
-        $events = Evento::queryEx($query);
+        $events = ActiveRecord::queryEx($query);
 
         // Agrupar eventos por fecha
         $dates = [];

@@ -10,6 +10,7 @@ const etiquietas = document.getElementById("etiquetas");
 document.addEventListener("DOMContentLoaded", () =>
 {
     fixedNav(); // Controla el comportamiento del .bar
+    activeLink(); // Manejar el active link del bar-nav
     onAnimateSummary(); // Anima los números en la seccion .summary
     loadMap(); // Carga el mapa leaflet
     formEvent(); // Calcula los precios (/registro.html)
@@ -38,6 +39,19 @@ function fixedNav()
         }
     });
     observer.observe(last_element); // Le decimos al observer que observe por el "last_element"
+}
+
+
+// Active link
+function activeLink()
+{
+    const active_link = document.querySelector('div[bar-nav]'); // Buscar por el div con el atributo "bar-nav"
+    if(active_link)
+    {
+        const att = active_link.getAttribute("bar-nav"); // Extraer el texto del atributo "bar-nav"
+        const nav = document.querySelector(`.bar-nav a[href="${att}"]`); // Buscar por el enlace que su href sea igual al texto del atributo "bar-nav"
+        if(nav) nav.classList.add("bar-nav__active"); // Añadir la clase de link activo
+    }
 }
 
 
@@ -168,20 +182,10 @@ function loadMap()
 //
 $(function()
 {
-    // Verificar enlace activo
-    const active_link = document.querySelector('div[bar-nav]'); // Buscar por el div con el atributo "bar-nav"
-    if(active_link)
-    {
-        const att = active_link.getAttribute("bar-nav"); // Extraer el texto del atributo "bar-nav"
-        const nav = document.querySelector(`.bar-nav a[href="${att}"]`); // Buscar por el enlace que su href sea igual al texto del atributo "bar-nav"
-        if(nav) nav.classList.add("bar-nav__active"); // Añadir la clase de link activo
-    }
-
     // Programa del evento
     $(".pcard-info").hide(); // Ocultar todos los .pcard-info
     $(".pcard-info:first").show(); // Selecciona el primer .pcard-info y lo muestra (default)
     $(".pcard-links a:first").addClass("pcard-link__active");
-
 
     // Cuando el usuario haga click en talleres/conferencias/seminarios
     $(".pcard-links a").on("click", function() 

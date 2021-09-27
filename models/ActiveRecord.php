@@ -51,23 +51,7 @@ class ActiveRecord
 
 
     // query
-    public static function all()
-    {
-        return self::query("SELECT * FROM " . (static::$table));
-    }
-    public static function findById($id)
-    {
-        return self::query("SELECT * FROM " . (static::$table) . " WHERE id = ${id}");
-    }
-    public static function findValue($column, $value)
-    {
-        return self::query("SELECT * FROM " . (static::$table) . " WHERE ${column} = '${value}' LIMIT 1");
-    }
-    public static function limit($limit)
-    {
-        return self::query("SELECT * FROM " . (static::$table) . " LIMIT ${limit}");
-    }
-    public static function query($query)
+    public static function query($query) // Extrar datos iterando
     {
         $resultado = self::$db->query($query); // Consultar a la db
         $array = [];
@@ -79,7 +63,8 @@ class ActiveRecord
         $resultado->free(); // Liberar memoria
         return $array; // Retornar resultados
     }
-    public static function queryEx($query)
+
+    public static function queryEx($query) // Consultas personalizadas
     {
         $result = self::$db->query($query);
         $array = [];
@@ -91,8 +76,30 @@ class ActiveRecord
         $result->free();
         return $array;
     }
+    
+    public static function all() // Consultar todos los datos
+    {
+        return self::query("SELECT * FROM " . (static::$table));
+    }
 
-    public static function createObject($registro)
+    public static function findById($id) // Consultar un dato por su id
+    {
+        return self::query("SELECT * FROM " . (static::$table) . " WHERE id = ${id}");
+    }
+
+    public static function findValue($column, $value, $limit = 1) // Consultar por un valor
+    {
+        return self::query("SELECT * FROM " . (static::$table) . " WHERE ${column} = '${value}' LIMIT ${limit}");
+    }
+
+    public static function limit($limit) // Consultar un número limitado de datos
+    {
+        return self::query("SELECT * FROM " . (static::$table) . " LIMIT ${limit}");
+    }
+
+
+    // Globales
+    public static function createObject($registro) // Crear objeto
     {
         $object = new static;
         foreach($registro as $key => $value)
@@ -101,10 +108,8 @@ class ActiveRecord
         }
         return $object;
     }
-    
 
-    // Sicronizar el objeto en la memoria con los valores editados
-    public function sync($args = [])
+    public function sync($args = []) // Sicronizar el objeto en la memoria con los valores editados
     {
         foreach($args as $key => $value)
         {
