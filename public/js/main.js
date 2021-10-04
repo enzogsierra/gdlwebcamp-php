@@ -1,12 +1,3 @@
-// Seleccionar elementos
-const pase_1d = document.getElementById("pase_1d");
-const pase_td = document.getElementById("pase_td");
-const pase_2d = document.getElementById("pase_2d");
-const camisas = document.getElementById("camisas");
-const etiquietas = document.getElementById("etiquetas");
-
-
-//
 document.addEventListener("DOMContentLoaded", () =>
 {
     fixedNav(); // Controla el comportamiento del .bar
@@ -78,14 +69,17 @@ function onAnimateSummary()
 }
 
 
-//
+// Controlar el form de /reservaciones
 function formEvent()
 {
     if(!document.querySelector(".form")) return 1;
 
+    
     const nombre = document.getElementById("nombre");
     const apellido = document.getElementById("apellido");
     const email = document.getElementById("email");
+    const camisas = document.getElementById("camisas");
+    const etiquietas = document.getElementById("etiquetas");
 
     // Calcular
     const regalo = document.getElementById("regalo");
@@ -94,28 +88,57 @@ function formEvent()
     calcular.addEventListener("click", (e) =>
     {
         e.preventDefault();
+
+        //
+        if(!selectedTicket)
+        {
+            alert("Debes seleccionar un ticket");
+            return;
+        }
+        if(selectedDatesCount != maxDates)
+        {
+            alert("Debes seleccionar las fechas que quieres asistir");
+            return;
+        }
         if(!regalo.value)
         {
-            alert("Debes elegir un regalo");
+            alert("No te olvides de elegir un regalo");
             regalo.focus();
             return;
         }
 
         // Obtener precios
-        const n1 = (parseInt(pase_1d.value, 10) || 0) * 30; // Pase 1 dia
-        const n2 = (parseInt(pase_td.value, 10) || 0) * 50; // Pase todos los dias
-        const n3 = (parseInt(pase_2d.value, 10) || 0) * 45; // Pase 2 dias
-        const n4 = ((parseInt(camisas.value, 10) || 0) * 10) * .93; // Cantidad de camisetas
-        const n5 = (parseInt(etiquietas.value, 10) || 0) * 2; // Cantidad de etiquetas
-        const total = n1 + n2 + n3 + n4 + n5; // Total
+        const ticketPrice = parseInt(selectedTicket.getAttribute("ticket-price") || 0, 10); // Precio del ticket
+        const shirtPrice = ((parseInt(camisas.value, 10) || 0) * 10) * .93; // Precio de las camisetas con descuento
+        const labelPrice = (parseInt(etiquietas.value, 10) || 0) * 2; // Precio de las etiquetas
+        const total = ticketPrice + shirtPrice + labelPrice; // Total
 
         // Listar productos
         let productos = [];
-        if(pase_1d.value > 0) productos.push({texto: (pase_1d.value + (pase_1d.value == 1 ? " ticket" : " tickets") + " por 1 día"), precio: `$${n1}`});
-        if(pase_td.value > 0) productos.push({texto: (pase_td.value + (pase_td.value == 1 ? " ticket" : " tickets") + " para todos los días"), precio: `$${n2}`});
-        if(pase_2d.value > 0) productos.push({texto: (pase_2d.value + (pase_2d.value == 1 ? " ticket" : " tickets") + " por 2 días"), precio: `$${n3}`});
-        if(camisas.value > 0) productos.push({texto: (camisas.value + (camisas.value == 1 ? " camisa" : " camisas")), precio: `<strike class="text-muted">($${(n4 / .93).toFixed(0)})</strike> $${n4.toFixed(1)}!`});
-        if(etiquietas.value > 0) productos.push({texto: (etiquietas.value + (etiquietas.value == 1 ? " etiqueta" : " etiquetas")), precio: `$${n5}`});
+
+        productos.push(
+        {
+            texto: `Ticket para ` + (maxDates == 0 ? `todos los días` : `${maxDates} día/s`), 
+            precio: `$${(ticketPrice).toFixed(2)}`
+        });
+        if(camisas.value > 0) 
+        {
+            productos.push(
+            {
+                texto: (camisas.value + (camisas.value == 1 ? " camisa" : " camisas")), 
+                precio: `<strike class="text-muted">($${(shirtPrice / .93).toFixed(2)})</strike> $${(shirtPrice).toFixed(2)}!`
+            });
+        }
+        if(etiquietas.value > 0) 
+        {
+            productos.push(
+            {
+                texto: (etiquietas.value + (etiquietas.value == 1 ? " etiqueta" : " etiquetas")), 
+                precio: `$${(labelPrice).toFixed(2)}`
+            });
+        }
+
+        console.log(typeof total);
         
         // Listar productos en HTML
         let html = "<li><span>Producto</span><span>Precio</span></li>";
@@ -123,7 +146,7 @@ function formEvent()
         {
             html += `<li><span>${producto.texto}</span><span>${producto.precio}</span></li>`;
         });
-        html += `<li><span>Total:</span><span>$${total.toFixed(1)}</span>`;
+        html += `<li><span>Total:</span><span>$${total}</span>`;
         
         // Mostrar/ocultar elementos
         document.querySelector(".form-pagos_default").classList.add("display-none");
@@ -142,7 +165,9 @@ let maxDates = 0;
 
 function ticketsHandler()
 {
-    let ticketId = document.querySelector("#ticket-id"); // Input que almacena el ticketId seleccionado
+    if(!document.querySelector(".form")) return 1;
+    
+    let ticketId = document.querySelector("#ticket-id"); // Hidden input que almacena el ticketId seleccionado
 
     const tickets = document.querySelectorAll("div[ticket-id]");
     tickets.forEach(ticket => 
@@ -167,7 +192,7 @@ function ticketsHandler()
                 ticket.querySelector(".ticket-button").classList.add("display-none");
 
                 ticketId.value = ticket.getAttribute("ticket-id");
-                maxDates = ticket.getAttribute("ticket-maxDates");
+                maxDates = parseInt(ticket.getAttribute("ticket-maxDates"));
                 selectedTicket = ticket;
 
                 // Si el ticket seleccionado habiltia todas las fechas por default, mostrar todas las fechas
@@ -189,26 +214,42 @@ function ticketsHandler()
             // El usuario seleccionó una fecha
             if(e.target.nodeName == "INPUT")
             {
-                // maxDates 0 = todas las fechas seleccionadas por default
-                // maxDates 1 = 1 fecha selecionable posible (las fechas son input:radio)
-                if(maxDates < 2) return;
-
-                selectedDatesCount += (e.target.checked) ? (1) : (-1);
-                if(selectedDatesCount == maxDates)
+                switch(maxDates)
                 {
-                    // Deshabilitamos todos los checkbox excepto los que están seleccionados
-                    ticket.querySelectorAll(".ticket-date-id").forEach(input => { input.disabled = !(input.checked); });
-                }
-                else // El usuario todavía tiene fechas disponibles para seleccionar
-                {
-                    // Habilitar todos los inputs
-                    ticket.querySelectorAll(".ticket-date-id").forEach(input => { input.disabled = false; });
-                }
+                    case 0: break; // Todas las fechas seleccionadas por default
+                    case 1: // 1 sola fecha 
+                    {
+                        selectedDatesCount = 1;
 
-                // Mostrar/ocultar fechas
-                const dateId = e.target.getAttribute("date-id");
-                if(e.target.checked) document.querySelector(`.date[date-id='${dateId}'`).classList.remove("display-none");
-                else document.querySelector(`.date[date-id='${dateId}'`).classList.add("display-none");
+                        // Ocultar todos los elementos
+                        document.querySelectorAll(".date[date-id]").forEach(e => { e.classList.add("display-none"); });
+
+                        // Mostrar fecha seleccionada
+                        const dateId = e.target.getAttribute("date-id");
+                        document.querySelector(`.date[date-id='${dateId}'`).classList.remove("display-none");
+                        break;
+                    }
+                    default: // Múltiples fechas
+                    {
+                        selectedDatesCount += (e.target.checked) ? (1) : (-1);
+                        if(selectedDatesCount == maxDates)
+                        {
+                            // Deshabilitamos todos los checkbox excepto los que están seleccionados
+                            ticket.querySelectorAll(".ticket-date-id").forEach(input => { input.disabled = !(input.checked); });
+                        }
+                        else // El usuario todavía tiene fechas disponibles para seleccionar
+                        {
+                            // Habilitar todos los inputs
+                            ticket.querySelectorAll(".ticket-date-id").forEach(input => { input.disabled = false; });
+                        }
+
+                        // Mostrar/ocultar fechas
+                        const dateId = e.target.getAttribute("date-id");
+                        if(e.target.checked) document.querySelector(`.date[date-id='${dateId}'`).classList.remove("display-none");
+                        else document.querySelector(`.date[date-id='${dateId}'`).classList.add("display-none");
+                        break;
+                    }
+                }
 
                 // Mostrar/ocultar el texto .date-default
                 if(selectedDatesCount) document.querySelector(".form-dates .date-default").classList.add("display-none");

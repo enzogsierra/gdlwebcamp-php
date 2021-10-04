@@ -22,7 +22,7 @@
             <div class="tickets">
                 <!-- Crear card del ticket -->
                 <?php foreach($tickets as $ticket): ?>
-                    <div class="ticket" ticket-id="<?php echo $ticket["id"]; ?>" ticket-maxDates=<?php echo $ticket["nFechas"]; ?>>
+                    <div class="ticket" ticket-id="<?php echo $ticket["id"]; ?>" ticket-maxDates=<?php echo $ticket["nFechas"]; ?> ticket-price="<?php echo $ticket["precio"]; ?>">
                         <?php if($ticket["nFechas"] == 0): ?> <p class="ticket-header">Todos los dias!</p>
                         <?php elseif($ticket["nFechas"] == 1): ?> <p class="ticket-header">Pase por 1 día</p>
                         <?php else: ?> <p class="ticket-header">Pase por <?php echo $ticket["nFechas"]; ?> días!</p>
