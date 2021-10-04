@@ -123,8 +123,7 @@ class PublicController
             "categories" => Categoria::all(),
             "events" => Evento::all(),
             "tickets" => Ticket::query("SELECT * FROM tickets"),
-            "dates" => Fecha::all(),
-            "gifts" => Regalo::all()
+            "dates" => Fecha::all()
         ]);
     }
 }

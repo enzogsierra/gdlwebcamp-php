@@ -97,7 +97,8 @@ function formEvent()
         }
         if(selectedDatesCount != maxDates)
         {
-            alert("Debes seleccionar las fechas que quieres asistir");
+            alert("Debes seleccionar todas las fechas que quieres asistir");
+            selectedTicket.querySelector("input").focus();
             return;
         }
         if(!regalo.value)
@@ -112,6 +113,7 @@ function formEvent()
         const shirtPrice = ((parseInt(camisas.value, 10) || 0) * 10) * .93; // Precio de las camisetas con descuento
         const labelPrice = (parseInt(etiquietas.value, 10) || 0) * 2; // Precio de las etiquetas
         const total = ticketPrice + shirtPrice + labelPrice; // Total
+
 
         // Listar productos
         let productos = [];
@@ -138,8 +140,14 @@ function formEvent()
             });
         }
 
-        console.log(typeof total);
+        const selectedGift = regalo.querySelector(`option[value='${regalo.value}']`);
+        productos.push(
+        {
+            texto: `${selectedGift.text}`,
+            precio: "Gratis"
+        });
         
+
         // Listar productos en HTML
         let html = "<li><span>Producto</span><span>Precio</span></li>";
         productos.forEach(producto =>

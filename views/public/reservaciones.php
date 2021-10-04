@@ -1,17 +1,17 @@
 <section class="container section">
-    <form method="POST" action="/reservaciones" class="form" novalidate>
+    <form method="POST" action="/reservaciones" class="form">
 
         <!-- Datos del usuario -->
         <h2>Introduce tus datos</h2>
         <fieldset class="form-datos">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre">
+            <input type="text" id="nombre" name="nombre" required>
             
             <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" name="apellido">
+            <input type="text" id="apellido" name="apellido" required>
             
             <label for="email">Email</label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="email" name="email" required>
         </fieldset>
         
         <!-- Mostrar tickets -->
@@ -49,8 +49,8 @@
                                         <input 
                                             class="ticket-date-id"
                                             type="hidden" 
-                                            name="dates[]" 
-                                            value="<?php $date["id"]; ?>"
+                                            name="fechas[]" 
+                                            value="<?php echo $date["id"]; ?>"
                                             date-id="<?php echo $date["id"] ?>"
                                         >
                                         <p class="ticket-date"><span class="fas fa-check color-orange"></span> <?php echo utf8_encode(strftime("%A, %d %b", strtotime($date["fecha"]))); ?></p>
@@ -67,7 +67,7 @@
                                             <input 
                                                 class="ticket-date-id"
                                                 type="radio" 
-                                                name="dates[]" 
+                                                name="fechas[]" 
                                                 id="ticket-day<?php echo $ticket["id"] . $date["id"]; ?>" 
                                                 value="<?php echo $date["id"]; ?>"
                                                 date-id="<?php echo $date["id"] ?>"
@@ -87,7 +87,7 @@
                                             <input
                                                 class="ticket-date-id"
                                                 type="checkbox" 
-                                                name="dates[]" 
+                                                name="fechas[]" 
                                                 id="ticket-day<?php echo $ticket["id"] . $date["id"]; ?>" 
                                                 value="<?php echo $date["id"]; ?>"
                                                 date-id="<?php echo $date["id"] ?>"
@@ -128,7 +128,7 @@
                                     <label class="event-category__header" for="event_<?php echo $event["id"]; ?>">
                                         <input 
                                             type="checkbox" 
-                                            name="events[]" 
+                                            name="eventos[]" 
                                             id="event_<?php echo $event["id"]; ?>"
                                             value="<?php echo $event["id"]; ?>"
                                         >
@@ -152,21 +152,22 @@
 
                 <div>
                     <label for="camisas">Camisa del evento $10 (promoción 7% dto.)</label>
-                    <input type="number" min="0" max="3" placeholder="0" id="camisas">
+                    <input name="camisas" type="number" min="0" max="3" placeholder="0" id="camisas">
                 </div>
 
                 <div>
                     <label for="etiquetas">Paquete de 10 etiquetas $2 (HTML, CSS3, JavaScript, Google, Chrome)</label>
-                    <input type="number" min="0" placeholder="0" id="etiquetas">
+                    <input name="etiquetas" type="number" min="0" placeholder="0" id="etiquetas">
                 </div>
 
                 <div>
                     <label for="regalo">Selecciona un regalo</label>
-                    <select id="regalo" required>
+                    <select id="regalo" name="regalo" required>
                         <option value="" disabled selected>-- Seleccione un regalo --</option>
-                        <?php foreach($gifts as $gift): ?>
-                            <option value="<?php echo $gift["id"]; ?>"><?php echo $gift["nombre"]; ?></option>
-                        <?php endforeach; ?>
+
+                        <option value="1">Pulsera</option>
+                        <option value="2">Etiquetas</option>
+                        <option value="3">Plumas</option>
                     </select>
                 </div>
 
