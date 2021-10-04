@@ -10,82 +10,30 @@
             <!-- links -->
             <div class="pcard-links">
                 <?php foreach($categories as $category): ?>
-                    <a href="#<?php echo $category->titulo; ?>">
-                        <span class="color-orange fa <?php echo $category->icono; ?>"></span> 
-                        <?php echo $category->titulo; ?>
+                    <a href="#<?php echo $category["titulo"]; ?>">
+                        <span class="color-orange fa <?php echo $category["icono"]; ?>"></span> 
+                        <?php echo $category["titulo"]; ?>
                     </a>
                 <?php endforeach; ?>
             </div>
 
-            <!-- categorias -->
-            <?php foreach($categories as $category): ?>
-                <div class="pcard-info" id="<?php echo $category->titulo; ?>">
+            <!-- por categoría -->
+            <?php foreach($events as $categoryId => $event): ?>
+                <div class="pcard-info" id="<?php echo $categories[$categoryId]["titulo"]; ?>">
                     <!-- mostrar 2 eventos -->
-                    <?php foreach($program[$category->titulo] as $event): ?>
+                    <?php foreach($event as $info): ?>
                         <div>
-                            <h4><?php echo $event["titulo"]; ?></h4>
-                            <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> <?php echo $event["fecha"]; ?></p>
-                            <p><span class="far fa-clock color-orange" title="Horario"></span> <?php echo $event["hora"]; ?></p>
-                            <p><span class="fas fa-user color-orange" title="Invitado"></span> <?php echo $event["nombre"] . " " . $event["apellido"]; ?></p>
+                            <h4><?php echo $info["titulo"]; ?></h4>
+                            <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> <?php echo utf8_encode(strftime("%A, %d de %B del %Y", strtotime($dates[$info["fechaId"]]["fecha"]))); ?></p>
+                            <p><span class="far fa-clock color-orange" title="Horario"></span> <?php echo utf8_encode(strftime("%R", strtotime($info["hora"]))); ?></p>
+                            <p><span class="fas fa-user color-orange" title="Invitado"></span> <?php echo $guests[$info["invitadoId"]]["nombre"] . " " . $guests[$info["invitadoId"]]["apellido"]; ?></p>
                         </div>
                     <?php endforeach; ?>
                 </div>
             <?php endforeach; ?>
 
-            <!-- <div class="pcard-links">
-                <a href="#talleres"><span class="fa fa-code color-orange"></span> Talleres</a>
-                <a href="#conferencias"><span class="fa fa-comment color-orange"></span> Conferecias</a>
-                <a href="#seminarios"><span class="fa fa-university color-orange"></span> Seminarios</a>
-            </div>
-
-            <-- INFO --
-            <div class="pcard-info" id="talleres">
-                <div>
-                    <h4>HTML5, CSS3 y JavaScript</h4>
-                    <p><span class="far fa-clock color-orange" title="Horario"></span> 16:00</p>
-                    <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> 10 de Diciembre</p>
-                    <p><span class="fas fa-user color-orange" title="Profesor"></span> Juan Pablo de la Torre</p>
-                </div>
-                <div>
-                    <h4>Responsive Web Design</h4>
-                    <p><span class="far fa-clock color-orange" title="Horario"></span> 18:00</p>
-                    <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> 10 de Diciembre</p>
-                    <p><span class="fas fa-user color-orange" title="Profesor"></span> Juan Pablo de la Torre</p>
-                </div>
-            </div>
-
-            <div class="pcard-info" id="conferencias">
-                <div>
-                    <h4>Cómo ser freelancer</h4>
-                    <p><span class="far fa-clock color-orange" title="Horario"></span> 16:00</p>
-                    <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> 11 de Diciembre</p>
-                    <p><span class="fas fa-user color-orange" title="Profesor"></span> Gregorio Sanchez</p>
-                </div>
-                <div>
-                    <h4>Tecnologías del futuro</h4>
-                    <p><span class="far fa-clock color-orange" title="Horario"></span> 18:00</p>
-                    <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> 11 de Diciembre</p>
-                    <p><span class="fas fa-user color-orange" title="Profesor"></span> Susana Sanchez</p>
-                </div>
-            </div>
-
-            <div class="pcard-info" id="seminarios">
-                <div>
-                    <h4>Diseño UI/UX para móviles</h4>
-                    <p><span class="far fa-clock color-orange" title="Horario"></span> 14:00</p>
-                    <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> 12 de Diciembre</p>
-                    <p><span class="fas fa-user color-orange" title="Profesor"></span> Susana Rivero</p>
-                </div>
-                <div>
-                    <h4>Aprende a programar</h4>
-                    <p><span class="far fa-clock color-orange" title="Horario"></span> 16:00</p>
-                    <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> 12 de Diciembre</p>
-                    <p><span class="fas fa-user color-orange" title="Profesor"></span> Susana Rivero</p>
-                </div>
-            </div> -->
-
             <div class="pcard-button">
-                <a href="#">ver todos</a> 
+                <a href="/calendario">ver todos</a> 
             </div>
         </div>
     </div>
@@ -133,47 +81,30 @@
 </div>
 
 
-<!-- PRECIOS -->
+<!-- TICKETS -->
 <section class="container section">
-    <h2 class="section-h">Precios</h2>
+    <h2 class="section-h">Tickets</h2>
 
-    <div class="prices">
-        <a href="" class="price">
-            <p class="price-days">&nbsp;</p>
-            <h3>&dollar;30</h3>
-            <div class="price-ben">
-                <p><span class="fas fa-check"></span> Bocadillos gratis</p>
-                <p><span class="fas fa-check"></span> Todas las conferencias</p>
-                <p><span class="fas fa-check"></span> Todos los talleres</p>
-            </div>
+    <div class="tickets">
+        <?php foreach($tickets as $ticket): ?>
+            <a href="/reservaciones" target="_blank" class="ticket">
+                <?php if($ticket["nFechas"] == 0): ?> <p class="ticket-header">Todos los dias!</p>
+                <?php elseif($ticket["nFechas"] == 1): ?> <p class="ticket-header">Pase por 1 día</p>
+                <?php else: ?> <p class="ticket-header">Pase por <?php echo $ticket["nFechas"]; ?> días!</p>
+                <?php endif; ?>
 
-            <p class="price-buy">Comprar</p>
-        </a>
-
-        <a href="#" class="price">
-            <p class="price-days">Todos los dias!</p>
-            <h3>&dollar;50</h3>
-            <div class="price-ben">
-                <p><span class="fas fa-check"></span> Bocadillos gratis</p>
-                <p><span class="fas fa-check"></span> Todas las conferencias</p>
-                <p><span class="fas fa-check"></span> Todos los talleres</p>
-            </div>
-
-            <p class="price-buy">Comprar</p>
-        </a>
-
-        <a href="#" class="price">
-            <p class="price-days">Pase por 2 días!</p>
-            <h3>&dollar;45</h3>
-            <div class="price-ben">
-                <p><span class="fas fa-check"></span> Bocadillos gratis</p>
-                <p><span class="fas fa-check"></span> Todas las conferencias</p>
-                <p><span class="fas fa-check"></span> Todos los talleres</p>
-            </div>
-
-            <p class="price-buy">Comprar</p>
-        </a>
-    </div>
+                <h3 class="ticket-price">&dollar;<?php echo number_format($ticket["precio"]); ?></h3>
+                
+                <div class="ticket-benfs">
+                    <?php foreach(json_decode($ticket["beneficios"]) as $ben): ?>
+                        <p><span class="fas fa-check"></span> <?php echo $ben; ?></p>
+                    <?php endforeach; ?>
+                </div>
+                
+                <p class="ticket-button" href="/reservaciones" class="price-buy">Comprar</p>
+            </a>
+        <?php endforeach; ?>
+    </div> 
 </section>
 
 

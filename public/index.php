@@ -11,5 +11,6 @@ $router->get("/conferencia", [PublicController::class, "conferencia"]);
 $router->get("/calendario", [PublicController::class, "calendario"]);
 $router->get("/invitados", [PublicController::class, "invitados"]);
 $router->get("/reservaciones", [PublicController::class, "reservaciones"]);
+$router->post("/reservaciones", [PublicController::class, "reservaciones"]);
 
 $router->checkRoutes();

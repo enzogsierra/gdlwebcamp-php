@@ -5,21 +5,19 @@ class Evento extends ActiveRecord
 {
     public $id;
     public $titulo;
-    public $fecha;
     public $hora;
-    public $clave;
+    public $fechaId;
     public $categoriaId;
     public $invitadoId;
     protected static $table = "eventos";
-    protected static $colums = ["id", "titulo", "fecha", "hora", "clave", "categoriaId", "invitadoId"];
+    protected static $colums = ["id", "titulo", "hora", "fechaId", "categoriaId", "invitadoId"];
 
     public function __construct($args = [])
     {
         $this->id = $args["id"] ?? "";
         $this->titulo = $args["titulo"] ?? "";
-        $this->fecha = $args["fecha"] ?? "";
         $this->hora = $args["hora"] ?? "";
-        $this->clave = $args["clave"] ?? "";
+        $this->fechaId = $args["fechaId"] ?? "";
         $this->categoriaId = $args["categoriaId"] ?? "";
         $this->invitadoId = $args["invitadoId"] ?? "";
     }

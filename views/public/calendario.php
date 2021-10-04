@@ -1,15 +1,9 @@
-<div bar-nav="/calendario"></div>
-
 <section class="container section">
     <h2 class="section-h">Calendario de eventos</h2>
 
-    <?php 
-    setlocale(LC_TIME, "spanish");
-
-    foreach($dates as $key => $date): 
-    ?>
+    <?php foreach($dates as $key => $date): ?>
         <div class="calendars-hero section">
-            <h3 class="calendar-header"><span class="far fa-calendar-alt"></span> <?php echo strftime("%A, %d de %B del %Y", strtotime($key)); ?></h3>
+            <h3 class="calendar-header"><span class="far fa-calendar-alt"></span> <?php echo utf8_encode(strftime("%A, %d de %B del %Y", strtotime($key))); ?></h3>
             
             <div class="calendars">
                 <?php foreach($date as $event): ?>
@@ -22,7 +16,7 @@
                             </p> 
                         </div>
                         <p class="calendar-guest"><span class="fas fa-user color-orange"></span> <?php echo $event["invitado"]; ?></p>
-                        <p><span class="far fa-clock color-orange"></span> <?php echo strftime("%R", strtotime($event["hora"])); ?></p>
+                        <p><span class="far fa-clock color-orange"></span> <?php echo utf8_encode(strftime("%R", strtotime($event["hora"]))); ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>

@@ -1,33 +1,35 @@
 <?php
 namespace Controllers;
 
-use Model\ActiveRecord;
 use MVC\Router;
-use Model\Evento;
+use Model\ActiveRecord;
 use Model\Categoria;
+use Model\Evento;
 use Model\Invitado;
+use Model\Regalo;
+use Model\Registrado;
+use Model\Ticket;
+use Model\Fecha;
 
 class PublicController
 {
     public static function index(Router $router)
     {
-        $program = [];
         $categories = Categoria::all();
-        foreach($categories as $category) // Iterar sobre cada categoría
+        foreach($categories as $id => $category)
         {
-            $id = $category->id;
-            $query = "SELECT eventos.titulo, fecha, hora, categoriaId, invitados.nombre, invitados.apellido FROM eventos ";
-            $query .= "INNER JOIN invitados ON eventos.invitadoId = invitados.id ";
-            $query .= "WHERE categoriaId = '${id}' LIMIT 2";
-            $program[$category->titulo] = ActiveRecord::queryEx($query);
+            $events[$id] = Evento::queryEx("titulo, hora, fechaId, invitadoId", "WHERE categoriaId = ${id} LIMIT 2");
         }
 
-        $router->render("public/index",
+        setlocale(LC_TIME, "spanish");
+        $router->render("public/index", 
         [
             "load_file" => "colorbox",
-            "categories" => $categories,
-            "program" => $program,
-            "guests" => Invitado::all()
+            "categories" => Categoria::all(),
+            "events" => $events,
+            "guests" => Invitado::all(),
+            "dates" => Fecha::all(),
+            "tickets" => Ticket::all()
         ]);
     }
 
@@ -41,12 +43,13 @@ class PublicController
 
     public static function calendario(Router $router)
     {
-        // Consulta personalizada
-        $query = "SELECT eventos.id, eventos.titulo, fecha, hora, concat(invitados.nombre, ' ', invitados.apellido) as invitado, categorias.titulo as categoria, icono FROM eventos ";
+        setlocale(LC_TIME, "spanish"); 
+        $query = "SELECT eventos.id, eventos.titulo, hora, fechas.fecha, concat(invitados.nombre, ' ', invitados.apellido) as invitado, categorias.titulo as categoria, icono FROM eventos ";
         $query .= "INNER JOIN invitados ON eventos.invitadoId = invitados.id ";
         $query .= "INNER JOIN categorias ON eventos.categoriaId = categorias.id ";
+        $query .= "INNER JOIN fechas ON eventos.fechaId = fechas.id ";
         $query .= "ORDER BY hora";
-        $events = ActiveRecord::queryEx($query);
+        $events = ActiveRecord::query($query);
 
         // Agrupar eventos por fecha
         $dates = [];
@@ -72,8 +75,56 @@ class PublicController
 
     public static function reservaciones(Router $router)
     {
+        /*if($_SERVER["REQUEST_METHOD"] === "POST")
+        {
+            if(!isset($_POST["submit"])) header("Location: /");
+
+            debug($_POST);
+        }
+
+        $router->render("public/reservaciones", []);
+        exit;
+
+        $query = "SELECT eventos.id, eventos.titulo, fecha, hora, categoriaId, categorias.titulo AS categoria, concat(invitados.nombre, ' ', invitados.apellido) AS invitado FROM eventos ";
+        $query .= "INNER JOIN categorias ON eventos.categoriaId = categorias.id ";
+        $query .= "INNER JOIN invitados ON eventos.invitadoId = invitados.id ";
+        $query .= "ORDER BY hora";
+        $results = ActiveRecord::queryEx($query);
+        $dates = [];
+
+        // Ordenar resultados por "fecha" => "categoria" => "info evento"
+        setlocale(LC_TIME, "spanish");
+        foreach($results as $result)
+        {
+            $fecha = strftime("%A, %d de %B del %Y", strtotime($result["fecha"]));
+            $dates[$fecha][$result["categoria"]][] = 
+                array(
+                    "id" => $result["id"], 
+                    "titulo" => $result["titulo"], 
+                    "invitado" => $result["invitado"], 
+                    "hora" => strftime("%R", strtotime($result["hora"]))
+                );
+        }
+
         $router->render("public/reservaciones", 
         [
+            "dates" => $dates,
+            "gifts" => Regalo::all()
+        ]);*/
+
+        if($_SERVER["REQUEST_METHOD"] === "POST")
+        {
+            debug($_POST);
+        }
+
+        setlocale(LC_TIME, "spanish");
+        $router->render("public/reservaciones",
+        [
+            "categories" => Categoria::all(),
+            "events" => Evento::all(),
+            "tickets" => Ticket::query("SELECT * FROM tickets"),
+            "dates" => Fecha::all(),
+            "gifts" => Regalo::all()
         ]);
     }
 }

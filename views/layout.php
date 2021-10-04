@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#353535">
         
@@ -50,9 +50,9 @@
                 </a>
 
                 <div class="bar-nav">
-                    <a href="/conferencia">Conferencia</a>
-                    <a href="/calendario">Calendario</a>
-                    <a href="/invitados">Invitados</a>
+                    <a href="/conferencia" active-link>Conferencia</a>
+                    <a href="/calendario" active-link>Calendario</a>
+                    <a href="/invitados" active-link>Invitados</a>
                     <a href="/reservaciones">Reservaciones</a>
                 </div>
             </div>

@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", () =>
     onAnimateSummary(); // Anima los números en la seccion .summary
     loadMap(); // Carga el mapa leaflet
     formEvent(); // Calcula los precios (/registro.html)
-    tallerHandler(); // Controla los talleres que se muestran (/registro.html)
+    //tallerHandler(); // Controla los talleres que se muestran (/registro.html)
+    ticketsHandler();
 });
 
 
@@ -45,13 +46,9 @@ function fixedNav()
 // Active link
 function activeLink()
 {
-    const active_link = document.querySelector('div[bar-nav]'); // Buscar por el div con el atributo "bar-nav"
-    if(active_link)
-    {
-        const att = active_link.getAttribute("bar-nav"); // Extraer el texto del atributo "bar-nav"
-        const nav = document.querySelector(`.bar-nav a[href="${att}"]`); // Buscar por el enlace que su href sea igual al texto del atributo "bar-nav"
-        if(nav) nav.classList.add("bar-nav__active"); // Añadir la clase de link activo
-    }
+    const href = window.location.href.substr(window.location.href.lastIndexOf("/")); // Extraer el link que está visitando el usuario
+    const active_link = document.querySelector(`.bar-nav a[href='${href}'][active-link]`); // Buscar por el enlace que direccione al mismo link donde está el usuario actualmente
+    if(active_link) active_link.classList.add("bar-nav__active"); // Añadir la clase de link activo
 }
 
 
@@ -93,6 +90,7 @@ function formEvent()
     // Calcular
     const regalo = document.getElementById("regalo");
     const calcular = document.getElementById("calcular");
+    const pagar = document.getElementById("pagar");
     calcular.addEventListener("click", (e) =>
     {
         e.preventDefault();
@@ -113,48 +111,137 @@ function formEvent()
 
         // Listar productos
         let productos = [];
-        if(pase_1d.value > 0) productos.push({texto: (pase_1d.value + (pase_1d.value == 1 ? " pase" : " pases") + " por día"), precio: n1});
-        if(pase_td.value > 0) productos.push({texto: (pase_td.value + (pase_td.value == 1 ? " pase" : " pases") + " por todos los días"), precio: n2});
-        if(pase_2d.value > 0) productos.push({texto: (pase_2d.value + (pase_2d.value == 1 ? " pase" : " pases") + " por 2 días"), precio: n3});
-        if(camisas.value > 0) productos.push({texto: (camisas.value + (camisas.value == 1 ? " camisa" : " camisas")), precio: n4});
-        if(etiquietas.value > 0) productos.push({texto: (etiquietas.value + (etiquietas.value == 1 ? " etiqueta" : " etiquetas")), precio: n5});
+        if(pase_1d.value > 0) productos.push({texto: (pase_1d.value + (pase_1d.value == 1 ? " ticket" : " tickets") + " por 1 día"), precio: `$${n1}`});
+        if(pase_td.value > 0) productos.push({texto: (pase_td.value + (pase_td.value == 1 ? " ticket" : " tickets") + " para todos los días"), precio: `$${n2}`});
+        if(pase_2d.value > 0) productos.push({texto: (pase_2d.value + (pase_2d.value == 1 ? " ticket" : " tickets") + " por 2 días"), precio: `$${n3}`});
+        if(camisas.value > 0) productos.push({texto: (camisas.value + (camisas.value == 1 ? " camisa" : " camisas")), precio: `<strike class="text-muted">($${(n4 / .93).toFixed(0)})</strike> $${n4.toFixed(1)}!`});
+        if(etiquietas.value > 0) productos.push({texto: (etiquietas.value + (etiquietas.value == 1 ? " etiqueta" : " etiquetas")), precio: `$${n5}`});
         
-        // Mostrar productos en el resumen
-        const form_listado = document.querySelector(".resumen-listado");
-        let html = "";
+        // Listar productos en HTML
+        let html = "<li><span>Producto</span><span>Precio</span></li>";
         productos.forEach(producto =>
         {
-            html += `<li><span>${producto.texto}</span><span>$${producto.precio.toFixed(0)}</span></li>`;
+            html += `<li><span>${producto.texto}</span><span>${producto.precio}</span></li>`;
         });
-        html += `<li class="resumen-total">Total:<span>$${total}`;
-        form_listado.innerHTML = html;
+        html += `<li><span>Total:</span><span>$${total.toFixed(1)}</span>`;
+        
+        // Mostrar/ocultar elementos
+        document.querySelector(".form-pagos_default").classList.add("display-none");
+        document.querySelector(".form-pagos_resumen").classList.remove("display-none");
+        document.querySelector(".resumen-listado").innerHTML = html;
+
+        document.getElementById("pago").value = total;
     });
 }
 
-function tallerHandler()
-{
-    if(!document.querySelector(".form")) return; 
 
-    pase_1d.addEventListener("click", () => tallerHandlerEx(".taller-viernes", parseInt(pase_1d.value || 0)));
-    pase_td.addEventListener("click", () => tallerHandlerEx(".taller-sabado", parseInt(pase_td.value || 0)));
-    pase_2d.addEventListener("click", () => tallerHandlerEx(".taller-domingo", parseInt(pase_2d.value || 0)));
+// Tickets
+let selectedTicket = 0;
+let selectedDatesCount = 0;
+let maxDates = 0;
+
+function ticketsHandler()
+{
+    let ticketId = document.querySelector("#ticket-id"); // Input que almacena el ticketId seleccionado
+
+    const tickets = document.querySelectorAll("div[ticket-id]");
+    tickets.forEach(ticket => 
+    {
+        // Esta funcion es llamada cuando se presiona en el ticket o en cualquier elemento dentro del mismo
+        ticket.addEventListener("click", (e) =>
+        {
+            // El usuario seleccionó el ticket
+            if(ticket != selectedTicket)
+            {
+                // Resetear todos los tickets
+                ticketsReset();
+                tickets.forEach(e => 
+                { 
+                    e.classList.add("filter-grayscale"); // Dar filtro gris a los tickets
+                });
+
+                // Añadir clases al ticket clickeado
+                ticket.classList.add("ticket-selected");
+                ticket.classList.remove("filter-grayscale"); // Quitar filtro gris al ticket
+                ticket.querySelector(".ticket-dates").classList.remove("display-none");
+                ticket.querySelector(".ticket-button").classList.add("display-none");
+
+                ticketId.value = ticket.getAttribute("ticket-id");
+                maxDates = ticket.getAttribute("ticket-maxDates");
+                selectedTicket = ticket;
+
+                // Si el ticket seleccionado habiltia todas las fechas por default, mostrar todas las fechas
+                if(maxDates == 0)
+                {
+                    document.querySelector(".form-dates .date-default").classList.add("display-none");
+                    document.querySelectorAll(".form-dates .date").forEach(date => { date.classList.remove("display-none") });
+                }
+                return;
+            }
+
+            // El usuario presionó en el botón "Cancelar"
+            if(e.target.id == "ticket-cancel")
+            {
+                ticketsReset();
+                return;
+            }
+
+            // El usuario seleccionó una fecha
+            if(e.target.nodeName == "INPUT")
+            {
+                // maxDates 0 = todas las fechas seleccionadas por default
+                // maxDates 1 = 1 fecha selecionable posible (las fechas son input:radio)
+                if(maxDates < 2) return;
+
+                selectedDatesCount += (e.target.checked) ? (1) : (-1);
+                if(selectedDatesCount == maxDates)
+                {
+                    // Deshabilitamos todos los checkbox excepto los que están seleccionados
+                    ticket.querySelectorAll(".ticket-date-id").forEach(input => { input.disabled = !(input.checked); });
+                }
+                else // El usuario todavía tiene fechas disponibles para seleccionar
+                {
+                    // Habilitar todos los inputs
+                    ticket.querySelectorAll(".ticket-date-id").forEach(input => { input.disabled = false; });
+                }
+
+                // Mostrar/ocultar fechas
+                const dateId = e.target.getAttribute("date-id");
+                if(e.target.checked) document.querySelector(`.date[date-id='${dateId}'`).classList.remove("display-none");
+                else document.querySelector(`.date[date-id='${dateId}'`).classList.add("display-none");
+
+                // Mostrar/ocultar el texto .date-default
+                if(selectedDatesCount) document.querySelector(".form-dates .date-default").classList.add("display-none");
+                else document.querySelector(".form-dates .date-default").classList.remove("display-none");
+            }
+        })
+    });
 }
 
-function tallerHandlerEx(taller, value)
+function ticketsReset()
 {
-    // Seleccionar el día del taller y mostrarlo/ocultarlo según la cantidad de boletos seleccionados
-    const div = document.querySelectorAll(taller); // Selecciona el h4 y div
-    if(value) div.forEach(e => { e.classList.remove("display-none"); }); // Si hay 1 boleto o más, quitarle la clase de display-none
-    else div.forEach(e => { e.classList.add("display-none"); }); // Si no hay boletos, añadir la clase display-none
+    document.querySelector("#ticket-id").value = "0";
+    selectedTicket = maxDates = selectedDatesCount = 0;
 
-    //
-    const p = document.querySelector(".taller-default"); 
-
-    if(parseInt(pase_1d.value || 0) + parseInt(pase_td.value || 0)  + parseInt(pase_2d.value || 0)) 
+    const tickets = document.querySelectorAll(".ticket");
+    tickets.forEach(e =>
     {
-        p.classList.add("display-none");
-    }
-    else p.classList.remove("display-none");
+        e.classList.remove("ticket-selected");
+        e.classList.remove("filter-grayscale");
+        e.querySelector(".ticket-button").classList.remove("display-none");
+        e.querySelector(".ticket-dates").classList.add("display-none");
+
+        // Resetear inputs
+        const inputs = e.querySelectorAll(".ticket-date-id");
+        if(inputs)
+        {
+            inputs.forEach(i => { i.checked = i.disabled = false; });
+        }
+    });
+
+    // Ocultar fechas
+    document.querySelector(".form-dates .date-default").classList.remove("display-none");
+    document.querySelectorAll(".form-dates .date").forEach(date => { date.classList.add("display-none") });
 }
 
 
@@ -164,7 +251,7 @@ function loadMap()
     if(!document.getElementById("map")) return;
 
     let coords = [-34.65523, -58.526144]; // Coordenadas
-    let map = L.map('map').setView(coords, 20); // 20 = zoom
+    let map = L.map('map').setView(coords, 18); // 18 = zoom
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
     {
@@ -175,7 +262,6 @@ function loadMap()
         .bindPopup('GDLWEBCAPM 2021<br>Boletos ya disponibles!')
         .openPopup()
         .bindTooltip("GDLWEBCAMP 2021");
-
 }
 
 
@@ -213,7 +299,7 @@ $(function()
     // Colorbox
     try
     {
-        $(".guest-info").colorbox({inline: true, width: "40%"});
+        $(".guest-info").colorbox({inline: true, width: "600px"});
     }
     catch {}
 });

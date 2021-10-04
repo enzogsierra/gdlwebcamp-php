@@ -19,7 +19,7 @@ class ActiveRecord
         $input = [];
         foreach(static::$columns as $column)
         {
-            if($column === "id") continue;
+            //if($column === "id") continue;
             $input[$column] = self::$db->escape_string($this->$column);
         }
 
@@ -53,33 +53,35 @@ class ActiveRecord
     // query
     public static function query($query) // Extrar datos iterando
     {
-        $resultado = self::$db->query($query); // Consultar a la db
         $array = [];
-        while($registro = $resultado->fetch_assoc())
+        $result = self::$db->query($query); // Consultar a la db
+        while($row = $result->fetch_assoc()) 
         {
-            $array[] = static::createObject($registro);
+            $array[$row["id"]] = $row; // Asociar el id al array
         }
 
-        $resultado->free(); // Liberar memoria
+        $result->free(); // Liberar memoria
         return $array; // Retornar resultados
     }
 
-    public static function queryEx($query) // Consultas personalizadas
+    public static function queryEx($columns, $extra = "") // Consulta personalizada
     {
-        $result = self::$db->query($query);
+        return self::query("SELECT id, ${columns} FROM " . static::$table . " ${extra}"); 
+    }
+
+    public static function customQuery($query)
+    {
         $array = [];
-        while($row = $result->fetch_assoc())
-        {
-            $array[] = $row;
-        }
+        $result = self::$db->query($query);
+        while($array[] = $result->fetch_assoc()) { }
 
         $result->free();
-        return $array;
+        return $array; 
     }
-    
+
     public static function all() // Consultar todos los datos
     {
-        return self::query("SELECT * FROM " . (static::$table));
+        return self::query("SELECT * FROM " . static::$table);
     }
 
     public static function findById($id) // Consultar un dato por su id
@@ -87,7 +89,7 @@ class ActiveRecord
         return self::query("SELECT * FROM " . (static::$table) . " WHERE id = ${id}");
     }
 
-    public static function findValue($column, $value, $limit = 1) // Consultar por un valor
+    public static function findByColumn($column, $value, $limit = 1) // Consultar por un valor
     {
         return self::query("SELECT * FROM " . (static::$table) . " WHERE ${column} = '${value}' LIMIT ${limit}");
     }
