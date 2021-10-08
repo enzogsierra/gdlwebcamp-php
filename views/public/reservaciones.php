@@ -1,3 +1,9 @@
+<?php if(!empty($errors)): ?>
+    <?php foreach($errors as $error): ?>
+        <p><?php echo $error; ?></p>
+    <?php endforeach; ?>
+<?php endif; ?>
+
 <section class="container section">
     <form method="POST" action="/reservaciones" class="form">
 
@@ -17,7 +23,12 @@
         <!-- Mostrar tickets -->
         <h2>Tickets</h2>
         <fieldset class="form-tickets">
-            <input type="hidden" name="ticketId" value="0" id="ticket-id">
+            <!-- Hidden -->
+            <input type="hidden" name="pedido[ticketId]" value="0" id="ticket-id">
+
+            <?php foreach($dates as $date): ?>
+                <input id="_hidden-date-id" type="hidden" name="pedido[fechaId][]" value="<?php echo $date["id"]; ?>" disabled>
+            <?php endforeach; ?>
 
             <div class="tickets">
                 <!-- Crear card del ticket -->
@@ -46,17 +57,9 @@
 
                                 <div class="ticket-days">
                                     <?php foreach($dates as $date): ?>
-                                        <input 
-                                            class="ticket-date-id"
-                                            type="hidden" 
-                                            name="fechas[]" 
-                                            value="<?php echo $date["id"]; ?>"
-                                            date-id="<?php echo $date["id"] ?>"
-                                        >
                                         <p class="ticket-date"><span class="fas fa-check color-orange"></span> <?php echo utf8_encode(strftime("%A, %d %b", strtotime($date["fecha"]))); ?></p>
                                     <?php endforeach; ?>
                                 </div>
-
                             <!-- 1 día -->
                             <?php elseif($ticket["nFechas"] == 1): ?>
                                 <p class="text-muted">Selecciona un día</p>
@@ -67,9 +70,8 @@
                                             <input 
                                                 class="ticket-date-id"
                                                 type="radio" 
-                                                name="fechas[]" 
-                                                id="ticket-day<?php echo $ticket["id"] . $date["id"]; ?>" 
-                                                value="<?php echo $date["id"]; ?>"
+                                                name="_invalid-dates" 
+                                                id="ticket-day<?php echo $ticket["id"] . $date["id"]; ?>"
                                                 date-id="<?php echo $date["id"] ?>"
                                             >
                                             <?php echo utf8_encode(strftime("%A, %d %b", strtotime($date["fecha"]))); ?>
@@ -87,9 +89,7 @@
                                             <input
                                                 class="ticket-date-id"
                                                 type="checkbox" 
-                                                name="fechas[]" 
-                                                id="ticket-day<?php echo $ticket["id"] . $date["id"]; ?>" 
-                                                value="<?php echo $date["id"]; ?>"
+                                                id="ticket-day<?php echo $ticket["id"] . $date["id"]; ?>"
                                                 date-id="<?php echo $date["id"] ?>"
                                             >
                                             <?php echo utf8_encode(strftime("%A, %d %b", strtotime($date["fecha"]))); ?>
@@ -128,7 +128,7 @@
                                     <label class="event-category__header" for="event_<?php echo $event["id"]; ?>">
                                         <input 
                                             type="checkbox" 
-                                            name="eventos[]" 
+                                            name="pedido[eventoId][]" 
                                             id="event_<?php echo $event["id"]; ?>"
                                             value="<?php echo $event["id"]; ?>"
                                         >
@@ -152,22 +152,22 @@
 
                 <div>
                     <label for="camisas">Camisa del evento $10 (promoción 7% dto.)</label>
-                    <input name="camisas" type="number" min="0" max="3" placeholder="0" id="camisas">
+                    <input name="pedido[camisas]" type="number" min="0" max="3" value="0" id="camisas">
                 </div>
 
                 <div>
                     <label for="etiquetas">Paquete de 10 etiquetas $2 (HTML, CSS3, JavaScript, Google, Chrome)</label>
-                    <input name="etiquetas" type="number" min="0" placeholder="0" id="etiquetas">
+                    <input name="pedido[etiquetas]" type="number" min="0" value="0" id="etiquetas">
                 </div>
 
                 <div>
                     <label for="regalo">Selecciona un regalo</label>
-                    <select id="regalo" name="regalo" required>
+                    <select id="regalo" name="pedido[regalo]" required>
                         <option value="" disabled selected>-- Seleccione un regalo --</option>
 
-                        <option value="1">Pulsera</option>
-                        <option value="2">Etiquetas</option>
-                        <option value="3">Plumas</option>
+                        <option value="pulsera">Pulsera</option>
+                        <option value="etiquetas">Etiquetas</option>
+                        <option value="plumas">Plumas</option>
                     </select>
                 </div>
 
@@ -185,7 +185,7 @@
                 </ul>
 
                 <input type="hidden" name="pago" id="pago" value="0">
-                <input id="pagar" type="submit" name="submit" value="Pagar" class="btn btn-primary">
+                <button type="submit" id="pagar" class="btn btn-primary">Pagar</button>
             </div>
         </fieldset>
     </form>

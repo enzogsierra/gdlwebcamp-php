@@ -6,7 +6,6 @@ use Model\ActiveRecord;
 use Model\Categoria;
 use Model\Evento;
 use Model\Invitado;
-use Model\Regalo;
 use Model\Registrado;
 use Model\Ticket;
 use Model\Fecha;
@@ -75,55 +74,35 @@ class PublicController
 
     public static function reservaciones(Router $router)
     {
-        /*if($_SERVER["REQUEST_METHOD"] === "POST")
-        {
-            if(!isset($_POST["submit"])) header("Location: /");
-
-            debug($_POST);
-        }
-
-        $router->render("public/reservaciones", []);
-        exit;
-
-        $query = "SELECT eventos.id, eventos.titulo, fecha, hora, categoriaId, categorias.titulo AS categoria, concat(invitados.nombre, ' ', invitados.apellido) AS invitado FROM eventos ";
-        $query .= "INNER JOIN categorias ON eventos.categoriaId = categorias.id ";
-        $query .= "INNER JOIN invitados ON eventos.invitadoId = invitados.id ";
-        $query .= "ORDER BY hora";
-        $results = ActiveRecord::queryEx($query);
-        $dates = [];
-
-        // Ordenar resultados por "fecha" => "categoria" => "info evento"
-        setlocale(LC_TIME, "spanish");
-        foreach($results as $result)
-        {
-            $fecha = strftime("%A, %d de %B del %Y", strtotime($result["fecha"]));
-            $dates[$fecha][$result["categoria"]][] = 
-                array(
-                    "id" => $result["id"], 
-                    "titulo" => $result["titulo"], 
-                    "invitado" => $result["invitado"], 
-                    "hora" => strftime("%R", strtotime($result["hora"]))
-                );
-        }
-
-        $router->render("public/reservaciones", 
-        [
-            "dates" => $dates,
-            "gifts" => Regalo::all()
-        ]);*/
-
+        $errors = [];
         if($_SERVER["REQUEST_METHOD"] === "POST")
         {
-            debug($_POST);
+            $registrado = new Registrado($_POST);
+            $errors = $registrado->verify();
+
+            if(empty($errors))
+            {   
+                $registrado->pedido = json_encode($registrado->pedido);
+                if($registrado->save()) header("Location: /reservaciones?success=1");
+                else $errors[] = "Hubo un error al enviar el registro.";
+            }
         }
 
-        setlocale(LC_TIME, "spanish");
-        $router->render("public/reservaciones",
-        [
-            "categories" => Categoria::all(),
-            "events" => Evento::all(),
-            "tickets" => Ticket::query("SELECT * FROM tickets"),
-            "dates" => Fecha::all()
-        ]);
+        if(isset($_GET["success"]) && $_GET["success"] == 1)
+        {
+            $router->render("public/reservaciones-success");
+        }
+        else
+        {
+            setlocale(LC_TIME, "spanish");
+            $router->render("public/reservaciones",
+            [
+                "categories" => Categoria::all(),
+                "events" => Evento::all(),
+                "tickets" => Ticket::all(),
+                "dates" => Fecha::all(),
+                "errors" => $errors
+            ]);
+        }
     }
 }

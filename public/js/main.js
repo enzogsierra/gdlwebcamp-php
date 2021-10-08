@@ -178,6 +178,8 @@ function ticketsHandler()
     let ticketId = document.querySelector("#ticket-id"); // Hidden input que almacena el ticketId seleccionado
 
     const tickets = document.querySelectorAll("div[ticket-id]");
+    const hidden = document.querySelectorAll("#_hidden-date-id");
+
     tickets.forEach(ticket => 
     {
         // Esta funcion es llamada cuando se presiona en el ticket o en cualquier elemento dentro del mismo
@@ -203,11 +205,24 @@ function ticketsHandler()
                 maxDates = parseInt(ticket.getAttribute("ticket-maxDates"));
                 selectedTicket = ticket;
 
-                // Si el ticket seleccionado habiltia todas las fechas por default, mostrar todas las fechas
-                if(maxDates == 0)
+                // Controlar inputs
+                const inputs = ticket.querySelectorAll(".ticket-date-id");
+                
+                if(maxDates == 0) // Si el ticket seleccionado habiltia todas las fechas por default, mostrar todas las fechas
                 {
                     document.querySelector(".form-dates .date-default").classList.add("display-none");
                     document.querySelectorAll(".form-dates .date").forEach(date => { date.classList.remove("display-none") });
+
+                    // Checkear y deshabilitar fechas
+                    inputs.forEach(i => { i.checked = i.disabled = true; });
+
+                    // Habilitar los hidden inputs
+                    hidden.forEach(e => { e.disabled = false; });
+                }
+                else
+                {
+                    // Des-checkear y habilitar fechas
+                    inputs.forEach(i => { i.checked = i.disabled = false; });
                 }
                 return;
             }
@@ -229,18 +244,22 @@ function ticketsHandler()
                     {
                         selectedDatesCount = 1;
 
-                        // Ocultar todos los elementos
+                        // Ocultar todos los eventos
                         document.querySelectorAll(".date[date-id]").forEach(e => { e.classList.add("display-none"); });
 
-                        // Mostrar fecha seleccionada
+                        // Mostrar eventos de la fecha seleccionada
                         const dateId = e.target.getAttribute("date-id");
                         document.querySelector(`.date[date-id='${dateId}'`).classList.remove("display-none");
+
+                        // Manipular hidden inputs
+                        hidden.forEach(e => { e.disabled = true; });
+                        document.querySelector(`#_hidden-date-id[value='${dateId}']`).disabled = false;
                         break;
                     }
                     default: // Múltiples fechas
                     {
                         selectedDatesCount += (e.target.checked) ? (1) : (-1);
-                        if(selectedDatesCount == maxDates)
+                        if(selectedDatesCount == maxDates) // Cantidad de fechas posibles seleccionadas
                         {
                             // Deshabilitamos todos los checkbox excepto los que están seleccionados
                             ticket.querySelectorAll(".ticket-date-id").forEach(input => { input.disabled = !(input.checked); });
@@ -255,6 +274,13 @@ function ticketsHandler()
                         const dateId = e.target.getAttribute("date-id");
                         if(e.target.checked) document.querySelector(`.date[date-id='${dateId}'`).classList.remove("display-none");
                         else document.querySelector(`.date[date-id='${dateId}'`).classList.add("display-none");
+
+                        // Manipular hidden inputs
+                        ticket.querySelectorAll(".ticket-date-id").forEach(input =>
+                        {
+                            const dateId = input.getAttribute("date-id");
+                            document.querySelector(`#_hidden-date-id[value='${dateId}']`).disabled = !(input.checked);
+                        });
                         break;
                     }
                 }
@@ -282,11 +308,12 @@ function ticketsReset()
 
         // Resetear inputs
         const inputs = e.querySelectorAll(".ticket-date-id");
-        if(inputs)
-        {
-            inputs.forEach(i => { i.checked = i.disabled = false; });
-        }
+        if(inputs) inputs.forEach(i => { i.checked = false, i.disabled = true; });
     });
+
+    // Hidden inputs
+    const hidden = document.querySelectorAll("#_hidden-date-id");
+    hidden.forEach(e => { e.disabled = true; });
 
     // Ocultar fechas
     document.querySelector(".form-dates .date-default").classList.remove("display-none");

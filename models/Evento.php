@@ -10,7 +10,7 @@ class Evento extends ActiveRecord
     public $categoriaId;
     public $invitadoId;
     protected static $table = "eventos";
-    protected static $colums = ["id", "titulo", "hora", "fechaId", "categoriaId", "invitadoId"];
+    protected static $columns = ["id", "titulo", "hora", "fechaId", "categoriaId", "invitadoId"];
 
     public function __construct($args = [])
     {

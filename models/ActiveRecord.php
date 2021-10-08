@@ -19,7 +19,7 @@ class ActiveRecord
         $input = [];
         foreach(static::$columns as $column)
         {
-            //if($column === "id") continue;
+            if($column === "id") continue;
             $input[$column] = self::$db->escape_string($this->$column);
         }
 
