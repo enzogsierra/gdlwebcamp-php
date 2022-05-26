@@ -8,15 +8,14 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=Oswald:wght@300;500;700&family=PT+Sans:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=Oswald:wght@300;500;700&family=PT+Sans:wght@400;700&display=swap">
 
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/fontawesome.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/leaflet.css">
     <link rel="stylesheet" href="css/layout.css">
-
+    <link rel="stylesheet" href="css/colorbox.css">
+    <link rel="stylesheet" href="css/lightbox.css">
 
     <title>GDLWEBCAMP</title>
 </head>
@@ -38,7 +37,7 @@
                         Buenos Aires, Argentina</a>
                 </div>
 
-                <h1 class="event-name"><a href="/">gdlwebcamp</a></h1>
+                <h1 class="event-name"><a href="index.html">gdlwebcamp</a></h1>
                 <p class="event-slogan">La mejor conferencia de <span>diseño web</span></p>
             </div>
         </div>
@@ -51,10 +50,10 @@
             </a>
 
             <div class="bar-nav">
-                <a href="/conferencia" active-link>Conferencia</a>
-                <a href="/calendario" active-link>Calendario</a>
-                <a href="/invitados" active-link>Invitados</a>
-                <a href="/reservaciones">Reservaciones</a>
+                <a href="conferencia.html" active-link>Conferencia</a>
+                <a href="calendario.html" active-link>Calendario</a>
+                <a href="invitados.html" active-link>Invitados</a>
+                <a href="reservaciones.html">Reservaciones</a>
             </div>
         </div>
     </div>
@@ -62,7 +61,7 @@
     <!--  -->
 
     <section class="container section">
-        <form method="POST" action="/reservaciones" class="form">
+        <form action="index.html" class="form">
 
             <!-- Datos del usuario -->
             <h2>Introduce tus datos</h2>
@@ -423,7 +422,7 @@
                     </ul>
 
                     <input type="hidden" name="pago" id="pago" value="0">
-                    <button type="submit" id="pagar" class="btn btn-primary">Pagar</button>
+                    <a href="index.html" type="button" id="pagar" class="btn btn-primary">Pagar</a>
                 </div>
             </fieldset>
         </form>
