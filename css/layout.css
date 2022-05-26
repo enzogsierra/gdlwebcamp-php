@@ -708,7 +708,7 @@ a
 {
     margin: 2rem 0;
     padding: 2rem 0;
-    background-image: url("/img/bg-inscribir.jpg");
+    background-image: url("../img/bg-inscribir.jpg");
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
