@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#353535">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=Oswald:wght@300;500;700&family=PT+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/layout.css">
+
+
+    <title>GDLWEBCAMP</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content container">
+            <nav class="social-media">
+                <a href="#" class="fab fa-facebook-square" title="Facebook" target="_blank"></a>
+                <a href="#" class="fab fa-twitter" title="Twitter" target="_blank"></a>
+                <a href="#" class="fab fa-youtube" title="Youtube" target="_blank"></a>
+                <a href="#" class="fab fa-instagram" title="Instagram" target="_blank"></a>
+            </nav>
+
+            <div class="event-info">
+                <div class="event-info__icons">
+                    <p class="event-date"><span class="far fa-calendar-alt"></span> 10/12/2021</p>
+                    <a href="#map" class="event-city" title="Ver mapa"><span class="fas fa-map-marker-alt"></span>
+                        Buenos Aires, Argentina</a>
+                </div>
+
+                <h1 class="event-name"><a href="/">gdlwebcamp</a></h1>
+                <p class="event-slogan">La mejor conferencia de <span>diseño web</span></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="bar">
+        <div class="container">
+            <a href="/">
+                <img src="img/logo.svg" class="bar-img" alt="logo gdlwebcamp">
+            </a>
+
+            <div class="bar-nav">
+                <a href="/conferencia" active-link>Conferencia</a>
+                <a href="/calendario" active-link>Calendario</a>
+                <a href="/invitados" active-link>Invitados</a>
+                <a href="/reservaciones">Reservaciones</a>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+    <section class="container section">
+        <h2 class="section-h">Calendario de eventos</h2>
+
+        <div class="calendars-hero section">
+            <h3 class="calendar-header"><span class="far fa-calendar-alt"></span> jueves, 09 de diciembre del 2021</h3>
+
+            <div class="calendars">
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Responsive Web Design</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Rafael Bautista</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Cómo ser freelancer</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-comment"></span>
+                            Conferencia
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> María Córdoba</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Diseño UX/UI para móviles</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-university"></span>
+                            Seminario
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> María Córdoba</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Flexbox</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Shari Herrera</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">HTML5 y CSS3</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Gregorio Sánchez</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Drupal</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Susana Rivera</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Tecnologías del Futuro</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-comment"></span>
+                            Conferencia
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Rafael Bautista</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">WordPress</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Harold García</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Seguridad en la Web</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-comment"></span>
+                            Conferencia
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Shari Herrera</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+            </div>
+        </div>
+        <div class="calendars-hero section">
+            <h3 class="calendar-header"><span class="far fa-calendar-alt"></span> viernes, 10 de diciembre del 2021</h3>
+
+            <div class="calendars">
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">AngularJS</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Rafael Bautista</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Cómo crear una tienda online que venda millones en días</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-comment"></span>
+                            Conferencia
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> María Córdoba</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Aprende a programar en una mañana</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-university"></span>
+                            Seminario
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Gregorio Sánchez</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">PHP y MySQL</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Shari Herrera</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">JavaScript Avanzado</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Gregorio Sánchez</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">SEO en Google</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Susana Rivera</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Los mejores lugares para encontrar trabajo</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-comment"></span>
+                            Conferencia
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Rafael Bautista</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Programación Orientada a Objetos</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-university"></span>
+                            Seminario
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Harold García</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">De Photoshop a HTML5 y CSS3</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Harold García</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Pasos para crear un negocio rentable </p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-comment"></span>
+                            Conferencia
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Shari Herrera</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">PHP Intermedio y Avanzado</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> María Córdoba</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+            </div>
+        </div>
+        <div class="calendars-hero section">
+            <h3 class="calendar-header"><span class="far fa-calendar-alt"></span> sábado, 11 de diciembre del 2021</h3>
+
+            <div class="calendars">
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Laravel</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Rafael Bautista</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Cómo hacer Marketing en línea</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-comment"></span>
+                            Conferencia
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> María Córdoba</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Creando una App en Android en una mañana</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-university"></span>
+                            Seminario
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Susana Rivera</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Crea tu propia API</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Shari Herrera</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">JavaScript y jQuery</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Gregorio Sánchez</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Creando plantillas para WordPress</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Susana Rivera</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">¿Con qué lenguaje debo empezar?</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-comment"></span>
+                            Conferencia
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Shari Herrera</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Creando una App en iOS en una tarde</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-university"></span>
+                            Seminario
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Rafael Bautista</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Tiendas virtuales en Magento</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-code"></span>
+                            Taller
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Harold García</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+                <div class="calendar">
+                    <div>
+                        <p class="calendar-title">Frameworks y libreríaas Open Source</p>
+                        <p class="calendar-category">
+                            <span class="color-orange fa fa-comment"></span>
+                            Conferencia
+                        </p>
+                    </div>
+                    <p class="calendar-guest"><span class="fas fa-user color-orange"></span> Gregorio Sánchez</p>
+                    <p><span class="far fa-clock color-orange"></span> 00:00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--  -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-card">
+                <h3>Sobre <span class="color-orange">GDLWEBCAMP</span></h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi optio modi incidunt tenetur officia
+                    sunt minus rem. Quis impedit porro laboriosam, deleniti omnis optio? Id unde laborum nesciunt
+                    sapiente sunt!</p>
+            </div>
+
+            <div class="footer-card">
+                <h3>Ultimos tweets</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi optio modi incidunt tenetur officia
+                    sunt minus rem. Quis impedit porro laboriosam, deleniti omnis optio? Id unde laborum nesciunt
+                    sapiente sunt!</p>
+            </div>
+
+            <div class="footer-card">
+                <h3>Redes sociales</h3>
+                <nav class="social-media">
+                    <a href="#" class="fab fa-facebook-square" title="Facebook" target="_blank"></a>
+                    <a href="#" class="fab fa-twitter" title="Twitter" target="_blank"></a>
+                    <a href="#" class="fab fa-youtube" title="Youtube" target="_blank"></a>
+                    <a href="#" class="fab fa-instagram" title="Instagram" target="_blank"></a>
+                </nav>
+            </div>
+        </div>
+
+        <p class="footer-copyright">GDLWEBCAMP 2021. Todos los derechos reservados &copy;</p>
+    </footer>
+
+    <!--  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/animateNumber.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

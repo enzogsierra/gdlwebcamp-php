@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#353535">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=Oswald:wght@300;500;700&family=PT+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/layout.css">
+
+    <link rel='stylesheet' href='css/lightbox.css'>
+    <title>GDLWEBCAMP</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content container">
+            <nav class="social-media">
+                <a href="#" class="fab fa-facebook-square" title="Facebook" target="_blank"></a>
+                <a href="#" class="fab fa-twitter" title="Twitter" target="_blank"></a>
+                <a href="#" class="fab fa-youtube" title="Youtube" target="_blank"></a>
+                <a href="#" class="fab fa-instagram" title="Instagram" target="_blank"></a>
+            </nav>
+
+            <div class="event-info">
+                <div class="event-info__icons">
+                    <p class="event-date"><span class="far fa-calendar-alt"></span> 10/12/2021</p>
+                    <a href="#map" class="event-city" title="Ver mapa"><span class="fas fa-map-marker-alt"></span>
+                        Buenos Aires, Argentina</a>
+                </div>
+
+                <h1 class="event-name"><a href="/">gdlwebcamp</a></h1>
+                <p class="event-slogan">La mejor conferencia de <span>diseño web</span></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="bar">
+        <div class="container">
+            <a href="/">
+                <img src="img/logo.svg" class="bar-img" alt="logo gdlwebcamp">
+            </a>
+
+            <div class="bar-nav">
+                <a href="/conferencia" active-link>Conferencia</a>
+                <a href="/calendario" active-link>Calendario</a>
+                <a href="/invitados" active-link>Invitados</a>
+                <a href="/reservaciones">Reservaciones</a>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+    <div bar-nav="/conferencia"></div>
+
+    <section class="container section">
+        <h2 class="section-h">Galería de fotos</h2>
+
+        <div class="gallery">
+            <a href="img/galeria/01.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/01.jpg" alt="foto 1"></a>
+            <a href="img/galeria/02.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/02.jpg" alt="foto 2"></a>
+            <a href="img/galeria/03.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/03.jpg" alt="foto 3"></a>
+            <a href="img/galeria/04.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/04.jpg" alt="foto 4"></a>
+            <a href="img/galeria/05.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/05.jpg" alt="foto 5"></a>
+            <a href="img/galeria/06.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/06.jpg" alt="foto 6"></a>
+            <a href="img/galeria/07.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/07.jpg" alt="foto 7"></a>
+            <a href="img/galeria/08.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/08.jpg" alt="foto 8"></a>
+            <a href="img/galeria/09.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/09.jpg" alt="foto 9"></a>
+            <a href="img/galeria/10.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/10.jpg" alt="foto 10"></a>
+            <a href="img/galeria/11.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/11.jpg" alt="foto 11"></a>
+            <a href="img/galeria/12.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/12.jpg" alt="foto 12"></a>
+            <a href="img/galeria/13.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/13.jpg" alt="foto 13"></a>
+            <a href="img/galeria/14.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/14.jpg" alt="foto 14"></a>
+            <a href="img/galeria/15.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/15.jpg" alt="foto 15"></a>
+            <a href="img/galeria/16.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/16.jpg" alt="foto 16"></a>
+            <a href="img/galeria/17.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/17.jpg" alt="foto 17"></a>
+            <a href="img/galeria/18.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/18.jpg" alt="foto 18"></a>
+            <a href="img/galeria/19.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/19.jpg" alt="foto 19"></a>
+            <a href="img/galeria/20.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/20.jpg" alt="foto 20"></a>
+            <a href="img/galeria/21.jpg" data-lightbox="gallery"><img src="img/galeria/thumbs/21.jpg" alt="foto 21"></a>
+        </div>
+    </section>
+    <!--  -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-card">
+                <h3>Sobre <span class="color-orange">GDLWEBCAMP</span></h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi optio modi incidunt tenetur officia
+                    sunt minus rem. Quis impedit porro laboriosam, deleniti omnis optio? Id unde laborum nesciunt
+                    sapiente sunt!</p>
+            </div>
+
+            <div class="footer-card">
+                <h3>Ultimos tweets</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi optio modi incidunt tenetur officia
+                    sunt minus rem. Quis impedit porro laboriosam, deleniti omnis optio? Id unde laborum nesciunt
+                    sapiente sunt!</p>
+            </div>
+
+            <div class="footer-card">
+                <h3>Redes sociales</h3>
+                <nav class="social-media">
+                    <a href="#" class="fab fa-facebook-square" title="Facebook" target="_blank"></a>
+                    <a href="#" class="fab fa-twitter" title="Twitter" target="_blank"></a>
+                    <a href="#" class="fab fa-youtube" title="Youtube" target="_blank"></a>
+                    <a href="#" class="fab fa-instagram" title="Instagram" target="_blank"></a>
+                </nav>
+            </div>
+        </div>
+
+        <p class="footer-copyright">GDLWEBCAMP 2021. Todos los derechos reservados &copy;</p>
+    </footer>
+
+    <!--  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/animateNumber.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src='js/lightbox.js'></script>
+</body>
+
+</html>

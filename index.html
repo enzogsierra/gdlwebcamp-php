@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#353535">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=Oswald:wght@300;500;700&family=PT+Sans:wght@400;700&display=swap">
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel='stylesheet' href='css/colorbox.css'>
+
+    <title>GDLWEBCAMP</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content container">
+            <nav class="social-media">
+                <a href="#" class="fab fa-facebook-square" title="Facebook" target="_blank"></a>
+                <a href="#" class="fab fa-twitter" title="Twitter" target="_blank"></a>
+                <a href="#" class="fab fa-youtube" title="Youtube" target="_blank"></a>
+                <a href="#" class="fab fa-instagram" title="Instagram" target="_blank"></a>
+            </nav>
+
+            <div class="event-info">
+                <div class="event-info__icons">
+                    <p class="event-date"><span class="far fa-calendar-alt"></span> 10/12/2021</p>
+                    <a href="#map" class="event-city" title="Ver mapa"><span class="fas fa-map-marker-alt"></span>
+                        Buenos Aires, Argentina</a>
+                </div>
+
+                <h1 class="event-name"><a href="/">gdlwebcamp</a></h1>
+                <p class="event-slogan">La mejor conferencia de <span>diseño web</span></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="bar">
+        <div class="container">
+            <a href="/">
+                <img src="img/logo.svg" class="bar-img" alt="logo gdlwebcamp">
+            </a>
+
+            <div class="bar-nav">
+                <a href="/conferencia" active-link>Conferencia</a>
+                <a href="/calendario" active-link>Calendario</a>
+                <a href="/invitados" active-link>Invitados</a>
+                <a href="/reservaciones">Reservaciones</a>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+    <!-- PROGRAMA -->
+    <section class="program">
+        <div class="program-h">
+            <h2 class="section-h">La mejor conferencia de diseño web en español</h2>
+            <p class="program-h__p">Lorem ipsum dolor sit, amet consectetur adipisicing elit. <br>Quisquam doloribus
+                magnam ducimus enim expedita velit voluptate, quasi facilis sed, tenetur vero culpa est, veritatis animi
+                nihil eius voluptatibus nulla dicta.</p>
+
+            <div class="pcard">
+                <h3 class="pcard-header">Programa del evento</h3>
+
+                <!-- links -->
+                <div class="pcard-links">
+                    <a href="#Seminario">
+                        <span class="color-orange fa fa-university"></span>
+                        Seminario </a>
+                    <a href="#Conferencia">
+                        <span class="color-orange fa fa-comment"></span>
+                        Conferencia </a>
+                    <a href="#Taller">
+                        <span class="color-orange fa fa-code"></span>
+                        Taller </a>
+                </div>
+
+                <!-- por categoría -->
+                <div class="pcard-info" id="Seminario">
+                    <!-- mostrar 2 eventos -->
+                    <div>
+                        <h4>Diseño UX/UI para móviles</h4>
+                        <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> jueves, 09 de diciembre
+                            del 2021</p>
+                        <p><span class="far fa-clock color-orange" title="Horario"></span> 00:00</p>
+                        <p><span class="fas fa-user color-orange" title="Invitado"></span> María Córdoba</p>
+                    </div>
+                    <div>
+                        <h4>Aprende a programar en una mañana</h4>
+                        <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> viernes, 10 de diciembre
+                            del 2021</p>
+                        <p><span class="far fa-clock color-orange" title="Horario"></span> 00:00</p>
+                        <p><span class="fas fa-user color-orange" title="Invitado"></span> Gregorio Sánchez</p>
+                    </div>
+                </div>
+                <div class="pcard-info" id="Conferencia">
+                    <!-- mostrar 2 eventos -->
+                    <div>
+                        <h4>Cómo ser freelancer</h4>
+                        <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> jueves, 09 de diciembre
+                            del 2021</p>
+                        <p><span class="far fa-clock color-orange" title="Horario"></span> 00:00</p>
+                        <p><span class="fas fa-user color-orange" title="Invitado"></span> María Córdoba</p>
+                    </div>
+                    <div>
+                        <h4>Tecnologías del Futuro</h4>
+                        <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> jueves, 09 de diciembre
+                            del 2021</p>
+                        <p><span class="far fa-clock color-orange" title="Horario"></span> 00:00</p>
+                        <p><span class="fas fa-user color-orange" title="Invitado"></span> Rafael Bautista</p>
+                    </div>
+                </div>
+                <div class="pcard-info" id="Taller">
+                    <!-- mostrar 2 eventos -->
+                    <div>
+                        <h4>Responsive Web Design</h4>
+                        <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> jueves, 09 de diciembre
+                            del 2021</p>
+                        <p><span class="far fa-clock color-orange" title="Horario"></span> 00:00</p>
+                        <p><span class="fas fa-user color-orange" title="Invitado"></span> Rafael Bautista</p>
+                    </div>
+                    <div>
+                        <h4>Flexbox</h4>
+                        <p><span class="far fa-calendar-alt color-orange" title="Fecha"></span> jueves, 09 de diciembre
+                            del 2021</p>
+                        <p><span class="far fa-clock color-orange" title="Horario"></span> 00:00</p>
+                        <p><span class="fas fa-user color-orange" title="Invitado"></span> Shari Herrera</p>
+                    </div>
+                </div>
+
+                <div class="pcard-button">
+                    <a href="/calendario">ver todos</a>
+                </div>
+            </div>
+        </div>
+
+        <video class="program-video" autoplay loop poster="img/bg-talleres.jpg">
+            <source src="video/video.mp4" type="video/mp4">
+            <source src="video/video.webm" type="video/webm">
+            <source src="video/video.ogv" type="video/ogg">
+        </video>
+    </section>
+
+
+    <!-- INVITADOS -->
+    <section class="container section">
+        <h2 class="section-h">Nuestros invitados</h2>
+
+        <div class="guests section">
+            <a href="#invitado1" class="guest guest-info">
+                <img src="/img/invitado1.jpg" alt="invitado 1" loading="lazy">
+                <p>Rafael Bautista</p>
+            </a>
+
+            <div class="display-none">
+                <div class="guest-info" id="invitado1">
+                    <h2>Rafael Bautista</h2>
+                    <img src="/img/invitado1.jpg" alt="invitado 1" loading="lazy">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis auctor quam in
+                        suscipit</p>
+                </div>
+            </div>
+            <a href="#invitado2" class="guest guest-info">
+                <img src="/img/invitado2.jpg" alt="invitado 2" loading="lazy">
+                <p>Shari Herrera</p>
+            </a>
+
+            <div class="display-none">
+                <div class="guest-info" id="invitado2">
+                    <h2>Shari Herrera</h2>
+                    <img src="/img/invitado2.jpg" alt="invitado 2" loading="lazy">
+                    <p>Integer porttitor sem a malesuada elementum</p>
+                </div>
+            </div>
+            <a href="#invitado3" class="guest guest-info">
+                <img src="/img/invitado3.jpg" alt="invitado 3" loading="lazy">
+                <p>Gregorio Sánchez</p>
+            </a>
+
+            <div class="display-none">
+                <div class="guest-info" id="invitado3">
+                    <h2>Gregorio Sánchez</h2>
+                    <img src="/img/invitado3.jpg" alt="invitado 3" loading="lazy">
+                    <p>Maecenas eget ex eu odio facilisis placerat dignissim nec magna</p>
+                </div>
+            </div>
+            <a href="#invitado4" class="guest guest-info">
+                <img src="/img/invitado4.jpg" alt="invitado 4" loading="lazy">
+                <p>Susana Rivera</p>
+            </a>
+
+            <div class="display-none">
+                <div class="guest-info" id="invitado4">
+                    <h2>Susana Rivera</h2>
+                    <img src="/img/invitado4.jpg" alt="invitado 4" loading="lazy">
+                    <p>Morbi nibh velit, dictum vel est et, porttitor maximus lacus. Nulla lobortis porttitor eros, in
+                        sagittis purus volutpat vitae</p>
+                </div>
+            </div>
+            <a href="#invitado5" class="guest guest-info">
+                <img src="/img/invitado5.jpg" alt="invitado 5" loading="lazy">
+                <p>Harold García</p>
+            </a>
+
+            <div class="display-none">
+                <div class="guest-info" id="invitado5">
+                    <h2>Harold García</h2>
+                    <img src="/img/invitado5.jpg" alt="invitado 5" loading="lazy">
+                    <p>Praesent auctor a dui non faucibus. Vestibulum nec ipsum risus. Donec ac lacinia tellus.</p>
+                </div>
+            </div>
+            <a href="#invitado6" class="guest guest-info">
+                <img src="/img/invitado6.jpg" alt="invitado 6" loading="lazy">
+                <p>María Córdoba</p>
+            </a>
+
+            <div class="display-none">
+                <div class="guest-info" id="invitado6">
+                    <h2>María Córdoba</h2>
+                    <img src="/img/invitado6.jpg" alt="invitado 6" loading="lazy">
+                    <p>Pellentesque tincidunt erat suscipit auctor ultricies. Vestibulum ante ipsum primis in faucibus
+                        orci luctus et ultrices posuere cubilia curae</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- RESUMEN -->
+    <div class="summary-hero section">
+        <div class="container">
+            <div class="summary">
+                <div>
+                    <p class="summary-n"></p>
+                    <p class="summary-t">Invitados</p>
+                </div>
+                <div>
+                    <p class="summary-n"></p>
+                    <p class="summary-t">Talleres</p>
+                </div>
+                <div>
+                    <p class="summary-n"></p>
+                    <p class="summary-t">Días</p>
+                </div>
+                <div>
+                    <p class="summary-n"></p>
+                    <p class="summary-t">Conferencias</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TICKETS -->
+    <section class="container section">
+        <h2 class="section-h">Tickets</h2>
+
+        <div class="tickets">
+            <a href="/reservaciones" target="_blank" class="ticket">
+                <p class="ticket-header">Pase por 1 día</p>
+
+                <h3 class="ticket-price">&dollar;30</h3>
+
+                <div class="ticket-benfs">
+                    <p><span class="fas fa-check"></span> Bocadillos gratis</p>
+                    <p><span class="fas fa-check"></span> Todos los eventos</p>
+                </div>
+
+                <p class="ticket-button" href="/reservaciones" class="price-buy">Comprar</p>
+            </a>
+            <a href="/reservaciones" target="_blank" class="ticket">
+                <p class="ticket-header">Todos los dias!</p>
+
+                <h3 class="ticket-price">&dollar;50</h3>
+
+                <div class="ticket-benfs">
+                    <p><span class="fas fa-check"></span> Bocadillos gratis</p>
+                    <p><span class="fas fa-check"></span> Todos los eventos</p>
+                    <p><span class="fas fa-check"></span> Te llevas un regalo!</p>
+                </div>
+
+                <p class="ticket-button" href="/reservaciones" class="price-buy">Comprar</p>
+            </a>
+            <a href="/reservaciones" target="_blank" class="ticket">
+                <p class="ticket-header">Pase por 2 días!</p>
+
+                <h3 class="ticket-price">&dollar;45</h3>
+
+                <div class="ticket-benfs">
+                    <p><span class="fas fa-check"></span> Bocadillos gratis</p>
+                    <p><span class="fas fa-check"></span> Todos los eventos</p>
+                </div>
+
+                <p class="ticket-button" href="/reservaciones" class="price-buy">Comprar</p>
+            </a>
+        </div>
+    </section>
+
+
+    <!-- MAPA -->
+    <div id="map" class="section" style="height: 50vh;">
+
+    </div>
+
+
+    <!-- TESTIMONIALES -->
+    <section class="container section">
+        <h2 class="section-h">Testimoniales</h2>
+
+        <div class="testimonials">
+            <blockquote class="testimonial">
+                <p class="testimonial-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum atque eveniet
+                    mollitia vitae dolores ea, quaerat laboriosam labore et omnis autem ullam illum qui neque saepe
+                    assumenda soluta aperiam amet!</p>
+
+                <footer class="testimonial-footer">
+                    <img class="testimonial-img" src="img/invitado1.jpg" alt="foto del autor" loading="lazy">
+                    <div>
+                        <cite class="testimonial-name">Rafael Bautista</cite>
+                        <p class="testimonial-p">Diseñador en @prisma</p>
+                    </div>
+                </footer>
+            </blockquote>
+
+            <blockquote class="testimonial">
+                <p class="testimonial-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum atque eveniet
+                    mollitia vitae dolores ea, quaerat laboriosam labore et omnis autem ullam illum qui neque saepe
+                    assumenda soluta aperiam amet!</p>
+
+                <footer class="testimonial-footer">
+                    <img class="testimonial-img" src="img/invitado3.jpg" alt="foto del autor" loading="lazy">
+                    <div>
+                        <cite class="testimonial-name">Gregorio Sanchez</cite>
+                        <p class="testimonial-p">Desarrollador Web Freelancer</p>
+                    </div>
+                </footer>
+            </blockquote>
+
+            <blockquote class="testimonial">
+                <p class="testimonial-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum atque eveniet
+                    mollitia vitae dolores ea, quaerat laboriosam labore et omnis autem ullam illum qui neque saepe
+                    assumenda soluta aperiam amet!</p>
+
+                <footer class="testimonial-footer">
+                    <img class="testimonial-img" src="img/invitado4.jpg" alt="foto del autor" title="Susana Rivera"
+                        loading="lazy">
+                    <div>
+                        <cite class="testimonial-name">Susana Rivera</cite>
+                        <p class="testimonial-p">Analista de Sistemas</p>
+                    </div>
+                </footer>
+            </blockquote>
+        </div>
+    </section>
+
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter section">
+        <p>Inscríbete a nuestro newsletter</p>
+        <h3>gdlwebcamp</h3>
+        <a href="#">Registro</a>
+    </div>
+
+
+    <!-- COUNTDOWN -->
+    <div class="container section">
+        <h2 class="section-h">Faltan</h2>
+
+        <div class="summary countdown">
+            <div>
+                <p class="summary-n" id="countdown-d">0</p>
+                <p class="summary-t">Días</p>
+            </div>
+            <div>
+                <p class="summary-n" id="countdown-h">0</p>
+                <p class="summary-t">Horas</p>
+            </div>
+            <div>
+                <p class="summary-n" id="countdown-m">0</p>
+                <p class="summary-t">Minutos</p>
+            </div>
+            <div>
+                <p class="summary-n" id="countdown-s">0</p>
+                <p class="summary-t">Segundos</p>
+            </div>
+        </div>
+    </div> <!--  -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-card">
+                <h3>Sobre <span class="color-orange">GDLWEBCAMP</span></h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi optio modi incidunt tenetur officia
+                    sunt minus rem. Quis impedit porro laboriosam, deleniti omnis optio? Id unde laborum nesciunt
+                    sapiente sunt!</p>
+            </div>
+
+            <div class="footer-card">
+                <h3>Ultimos tweets</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi optio modi incidunt tenetur officia
+                    sunt minus rem. Quis impedit porro laboriosam, deleniti omnis optio? Id unde laborum nesciunt
+                    sapiente sunt!</p>
+            </div>
+
+            <div class="footer-card">
+                <h3>Redes sociales</h3>
+                <nav class="social-media">
+                    <a href="#" class="fab fa-facebook-square" title="Facebook" target="_blank"></a>
+                    <a href="#" class="fab fa-twitter" title="Twitter" target="_blank"></a>
+                    <a href="#" class="fab fa-youtube" title="Youtube" target="_blank"></a>
+                    <a href="#" class="fab fa-instagram" title="Instagram" target="_blank"></a>
+                </nav>
+            </div>
+        </div>
+
+        <p class="footer-copyright">GDLWEBCAMP 2021. Todos los derechos reservados &copy;</p>
+    </footer>
+
+    <!--  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/animateNumber.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src='js/colorbox.js'></script>
+</body>
+
+</html>

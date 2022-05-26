@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#353535">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=Oswald:wght@300;500;700&family=PT+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/layout.css">
+
+
+    <title>GDLWEBCAMP</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content container">
+            <nav class="social-media">
+                <a href="#" class="fab fa-facebook-square" title="Facebook" target="_blank"></a>
+                <a href="#" class="fab fa-twitter" title="Twitter" target="_blank"></a>
+                <a href="#" class="fab fa-youtube" title="Youtube" target="_blank"></a>
+                <a href="#" class="fab fa-instagram" title="Instagram" target="_blank"></a>
+            </nav>
+
+            <div class="event-info">
+                <div class="event-info__icons">
+                    <p class="event-date"><span class="far fa-calendar-alt"></span> 10/12/2021</p>
+                    <a href="#map" class="event-city" title="Ver mapa"><span class="fas fa-map-marker-alt"></span>
+                        Buenos Aires, Argentina</a>
+                </div>
+
+                <h1 class="event-name"><a href="/">gdlwebcamp</a></h1>
+                <p class="event-slogan">La mejor conferencia de <span>diseño web</span></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="bar">
+        <div class="container">
+            <a href="/">
+                <img src="img/logo.svg" class="bar-img" alt="logo gdlwebcamp">
+            </a>
+
+            <div class="bar-nav">
+                <a href="/conferencia" active-link>Conferencia</a>
+                <a href="/calendario" active-link>Calendario</a>
+                <a href="/invitados" active-link>Invitados</a>
+                <a href="/reservaciones">Reservaciones</a>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+
+    <section class="container section">
+        <form method="POST" action="/reservaciones" class="form">
+
+            <!-- Datos del usuario -->
+            <h2>Introduce tus datos</h2>
+            <fieldset class="form-datos">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </fieldset>
+
+            <!-- Mostrar tickets -->
+            <h2>Tickets</h2>
+            <fieldset class="form-tickets">
+                <!-- Hidden -->
+                <input type="hidden" name="pedido[ticketId]" value="0" id="ticket-id">
+
+                <input id="_hidden-date-id" type="hidden" name="pedido[fechaId][]" value="1" disabled>
+                <input id="_hidden-date-id" type="hidden" name="pedido[fechaId][]" value="2" disabled>
+                <input id="_hidden-date-id" type="hidden" name="pedido[fechaId][]" value="3" disabled>
+
+                <div class="tickets">
+                    <!-- Crear card del ticket -->
+                    <div class="ticket" ticket-id="1" ticket-maxDates=1 ticket-price="30.00">
+                        <p class="ticket-header">Pase por 1 día</p>
+
+                        <h3 class="ticket-price">&dollar;30</h3>
+
+                        <div class="ticket-benfs">
+                            <p><span class="fas fa-check"></span> Bocadillos gratis</p>
+                            <p><span class="fas fa-check"></span> Todos los eventos</p>
+                        </div>
+
+                        <p class="ticket-button">Seleccionar</p>
+
+                        <!-- Mostrar fechas -->
+                        <div class="ticket-dates display-none">
+                            <!-- Todos los días -->
+                            <p class="text-muted">Selecciona un día</p>
+
+                            <div class="ticket-days">
+                                <label class="ticket-date" for="ticket-day11">
+                                    <input class="ticket-date-id" type="radio" name="_invalid-dates" id="ticket-day11"
+                                        date-id="1">
+                                    jueves, 09 dic. </label>
+                                <label class="ticket-date" for="ticket-day12">
+                                    <input class="ticket-date-id" type="radio" name="_invalid-dates" id="ticket-day12"
+                                        date-id="2">
+                                    viernes, 10 dic. </label>
+                                <label class="ticket-date" for="ticket-day13">
+                                    <input class="ticket-date-id" type="radio" name="_invalid-dates" id="ticket-day13"
+                                        date-id="3">
+                                    sábado, 11 dic. </label>
+                            </div>
+
+                            <!-- 2+ días -->
+
+                            <input type="button" value="Cancelar" class="btn btn-secondary" id="ticket-cancel">
+                        </div>
+                    </div>
+                    <div class="ticket" ticket-id="2" ticket-maxDates=0 ticket-price="50.00">
+                        <p class="ticket-header">Todos los dias!</p>
+
+                        <h3 class="ticket-price">&dollar;50</h3>
+
+                        <div class="ticket-benfs">
+                            <p><span class="fas fa-check"></span> Bocadillos gratis</p>
+                            <p><span class="fas fa-check"></span> Todos los eventos</p>
+                            <p><span class="fas fa-check"></span> Te llevas un regalo!</p>
+                        </div>
+
+                        <p class="ticket-button">Seleccionar</p>
+
+                        <!-- Mostrar fechas -->
+                        <div class="ticket-dates display-none">
+                            <!-- Todos los días -->
+
+                            <p class="text-muted">Pase para los días:</p>
+
+                            <div class="ticket-days">
+                                <p class="ticket-date"><span class="fas fa-check color-orange"></span> jueves, 09 dic.
+                                </p>
+                                <p class="ticket-date"><span class="fas fa-check color-orange"></span> viernes, 10 dic.
+                                </p>
+                                <p class="ticket-date"><span class="fas fa-check color-orange"></span> sábado, 11 dic.
+                                </p>
+                            </div>
+                            <!-- 1 día -->
+
+                            <input type="button" value="Cancelar" class="btn btn-secondary" id="ticket-cancel">
+                        </div>
+                    </div>
+                    <div class="ticket" ticket-id="3" ticket-maxDates=2 ticket-price="45.00">
+                        <p class="ticket-header">Pase por 2 días!</p>
+
+                        <h3 class="ticket-price">&dollar;45</h3>
+
+                        <div class="ticket-benfs">
+                            <p><span class="fas fa-check"></span> Bocadillos gratis</p>
+                            <p><span class="fas fa-check"></span> Todos los eventos</p>
+                        </div>
+
+                        <p class="ticket-button">Seleccionar</p>
+
+                        <!-- Mostrar fechas -->
+                        <div class="ticket-dates display-none">
+                            <!-- Todos los días -->
+                            <p class="text-muted">Selecciona 2 días</p>
+
+                            <div class="ticket-days">
+                                <label class="ticket-date" for="ticket-day31">
+                                    <input class="ticket-date-id" type="checkbox" id="ticket-day31" date-id="1">
+                                    jueves, 09 dic. </label>
+                                <label class="ticket-date" for="ticket-day32">
+                                    <input class="ticket-date-id" type="checkbox" id="ticket-day32" date-id="2">
+                                    viernes, 10 dic. </label>
+                                <label class="ticket-date" for="ticket-day33">
+                                    <input class="ticket-date-id" type="checkbox" id="ticket-day33" date-id="3">
+                                    sábado, 11 dic. </label>
+                            </div>
+
+                            <input type="button" value="Cancelar" class="btn btn-secondary" id="ticket-cancel">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+
+            <!-- EVENTOS -->
+            <h2>Elige tus eventos</h2>
+            <fieldset class="form-dates">
+                <p class="date-default text-muted align-center">Selecciona un ticket para ver los eventos disponibles!
+                </p>
+
+                <!-- Fecha -->
+                <div class="date display-none" date-id="1">
+                    <h3 class="date-header">jueves, 09 diciembre del 2021</h3>
+
+                    <div class="date-events">
+                        <!-- Categorias -->
+                        <div>
+                            <h4 class="event-category">Seminario</h4>
+
+                            <!-- Eventos -->
+                            <label class="event-category__header" for="event_9">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_9" value="9">
+                                <time class="font-bold color-orange">00:00</time> Diseño UX/UI para móviles </label>
+                            <!-- Eventos/ -->
+                        </div>
+                        <div>
+                            <h4 class="event-category">Conferencia</h4>
+
+                            <!-- Eventos -->
+                            <label class="event-category__header" for="event_6">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_6" value="6">
+                                <time class="font-bold color-orange">00:00</time> Cómo ser freelancer </label>
+                            <label class="event-category__header" for="event_7">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_7" value="7">
+                                <time class="font-bold color-orange">00:00</time> Tecnologías del Futuro </label>
+                            <label class="event-category__header" for="event_8">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_8" value="8">
+                                <time class="font-bold color-orange">00:00</time> Seguridad en la Web </label>
+                            <!-- Eventos/ -->
+                        </div>
+                        <div>
+                            <h4 class="event-category">Taller</h4>
+
+                            <!-- Eventos -->
+                            <label class="event-category__header" for="event_1">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_1" value="1">
+                                <time class="font-bold color-orange">00:00</time> Responsive Web Design </label>
+                            <label class="event-category__header" for="event_2">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_2" value="2">
+                                <time class="font-bold color-orange">00:00</time> Flexbox </label>
+                            <label class="event-category__header" for="event_3">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_3" value="3">
+                                <time class="font-bold color-orange">00:00</time> HTML5 y CSS3 </label>
+                            <label class="event-category__header" for="event_4">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_4" value="4">
+                                <time class="font-bold color-orange">00:00</time> Drupal </label>
+                            <label class="event-category__header" for="event_5">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_5" value="5">
+                                <time class="font-bold color-orange">00:00</time> WordPress </label>
+                            <!-- Eventos/ -->
+                        </div>
+                        <!-- Categorias/ -->
+                    </div>
+                </div>
+                <div class="date display-none" date-id="2">
+                    <h3 class="date-header">viernes, 10 diciembre del 2021</h3>
+
+                    <div class="date-events">
+                        <!-- Categorias -->
+                        <div>
+                            <h4 class="event-category">Seminario</h4>
+
+                            <!-- Eventos -->
+                            <label class="event-category__header" for="event_19">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_19" value="19">
+                                <time class="font-bold color-orange">00:00</time> Aprende a programar en una mañana
+                            </label>
+                            <label class="event-category__header" for="event_20">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_20" value="20">
+                                <time class="font-bold color-orange">00:00</time> Programación Orientada a Objetos
+                            </label>
+                            <!-- Eventos/ -->
+                        </div>
+                        <div>
+                            <h4 class="event-category">Conferencia</h4>
+
+                            <!-- Eventos -->
+                            <label class="event-category__header" for="event_16">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_16" value="16">
+                                <time class="font-bold color-orange">00:00</time> Cómo crear una tienda online que venda
+                                millones en días </label>
+                            <label class="event-category__header" for="event_17">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_17" value="17">
+                                <time class="font-bold color-orange">00:00</time> Los mejores lugares para encontrar
+                                trabajo </label>
+                            <label class="event-category__header" for="event_18">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_18" value="18">
+                                <time class="font-bold color-orange">00:00</time> Pasos para crear un negocio rentable
+                            </label>
+                            <!-- Eventos/ -->
+                        </div>
+                        <div>
+                            <h4 class="event-category">Taller</h4>
+
+                            <!-- Eventos -->
+                            <label class="event-category__header" for="event_10">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_10" value="10">
+                                <time class="font-bold color-orange">00:00</time> AngularJS </label>
+                            <label class="event-category__header" for="event_11">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_11" value="11">
+                                <time class="font-bold color-orange">00:00</time> PHP y MySQL </label>
+                            <label class="event-category__header" for="event_12">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_12" value="12">
+                                <time class="font-bold color-orange">00:00</time> JavaScript Avanzado </label>
+                            <label class="event-category__header" for="event_13">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_13" value="13">
+                                <time class="font-bold color-orange">00:00</time> SEO en Google </label>
+                            <label class="event-category__header" for="event_14">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_14" value="14">
+                                <time class="font-bold color-orange">00:00</time> De Photoshop a HTML5 y CSS3 </label>
+                            <label class="event-category__header" for="event_15">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_15" value="15">
+                                <time class="font-bold color-orange">00:00</time> PHP Intermedio y Avanzado </label>
+                            <!-- Eventos/ -->
+                        </div>
+                        <!-- Categorias/ -->
+                    </div>
+                </div>
+                <div class="date display-none" date-id="3">
+                    <h3 class="date-header">sábado, 11 diciembre del 2021</h3>
+
+                    <div class="date-events">
+                        <!-- Categorias -->
+                        <div>
+                            <h4 class="event-category">Seminario</h4>
+
+                            <!-- Eventos -->
+                            <label class="event-category__header" for="event_29">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_29" value="29">
+                                <time class="font-bold color-orange">00:00</time> Creando una App en Android en una
+                                mañana </label>
+                            <label class="event-category__header" for="event_30">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_30" value="30">
+                                <time class="font-bold color-orange">00:00</time> Creando una App en iOS en una tarde
+                            </label>
+                            <!-- Eventos/ -->
+                        </div>
+                        <div>
+                            <h4 class="event-category">Conferencia</h4>
+
+                            <!-- Eventos -->
+                            <label class="event-category__header" for="event_26">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_26" value="26">
+                                <time class="font-bold color-orange">00:00</time> Cómo hacer Marketing en línea </label>
+                            <label class="event-category__header" for="event_27">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_27" value="27">
+                                <time class="font-bold color-orange">00:00</time> ¿Con qué lenguaje debo empezar?
+                            </label>
+                            <label class="event-category__header" for="event_28">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_28" value="28">
+                                <time class="font-bold color-orange">00:00</time> Frameworks y libreríaas Open Source
+                            </label>
+                            <!-- Eventos/ -->
+                        </div>
+                        <div>
+                            <h4 class="event-category">Taller</h4>
+
+                            <!-- Eventos -->
+                            <label class="event-category__header" for="event_21">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_21" value="21">
+                                <time class="font-bold color-orange">00:00</time> Laravel </label>
+                            <label class="event-category__header" for="event_22">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_22" value="22">
+                                <time class="font-bold color-orange">00:00</time> Crea tu propia API </label>
+                            <label class="event-category__header" for="event_23">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_23" value="23">
+                                <time class="font-bold color-orange">00:00</time> JavaScript y jQuery </label>
+                            <label class="event-category__header" for="event_24">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_24" value="24">
+                                <time class="font-bold color-orange">00:00</time> Creando plantillas para WordPress
+                            </label>
+                            <label class="event-category__header" for="event_25">
+                                <input type="checkbox" name="pedido[eventoId][]" id="event_25" value="25">
+                                <time class="font-bold color-orange">00:00</time> Tiendas virtuales en Magento </label>
+                            <!-- Eventos/ -->
+                        </div>
+                        <!-- Categorias/ -->
+                    </div>
+                </div>
+                <!-- Fecha/ -->
+            </fieldset>
+
+            <h2>Pagos y extras</h2>
+            <fieldset class="form-pagos">
+                <div class="form-pagos_extra">
+                    <h3 class="pagos-header">Extras</h3>
+
+                    <div>
+                        <label for="camisas">Camisa del evento $10 (promoción 7% dto.)</label>
+                        <input name="pedido[camisas]" type="number" min="0" max="3" value="0" id="camisas">
+                    </div>
+
+                    <div>
+                        <label for="etiquetas">Paquete de 10 etiquetas $2 (HTML, CSS3, JavaScript, Google,
+                            Chrome)</label>
+                        <input name="pedido[etiquetas]" type="number" min="0" value="0" id="etiquetas">
+                    </div>
+
+                    <div>
+                        <label for="regalo">Selecciona un regalo</label>
+                        <select id="regalo" name="pedido[regalo]" required>
+                            <option value="" disabled selected>-- Seleccione un regalo --</option>
+
+                            <option value="pulsera">Pulsera</option>
+                            <option value="etiquetas">Etiquetas</option>
+                            <option value="plumas">Plumas</option>
+                        </select>
+                    </div>
+
+                    <button id="calcular" class="btn btn-secondary">Calcular</button>
+                </div>
+
+                <div class="form-pagos_default">
+                    <p class="text-muted">Presiona en "Calcular" para obtener tu resumen!</p>
+                </div>
+
+                <div class="form-pagos_resumen display-none">
+                    <h3 class="pagos-header">Resumen</h3>
+
+                    <ul class="resumen-listado">
+                    </ul>
+
+                    <input type="hidden" name="pago" id="pago" value="0">
+                    <button type="submit" id="pagar" class="btn btn-primary">Pagar</button>
+                </div>
+            </fieldset>
+        </form>
+    </section>
+    <!--  -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-card">
+                <h3>Sobre <span class="color-orange">GDLWEBCAMP</span></h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi optio modi incidunt tenetur officia
+                    sunt minus rem. Quis impedit porro laboriosam, deleniti omnis optio? Id unde laborum nesciunt
+                    sapiente sunt!</p>
+            </div>
+
+            <div class="footer-card">
+                <h3>Ultimos tweets</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi optio modi incidunt tenetur officia
+                    sunt minus rem. Quis impedit porro laboriosam, deleniti omnis optio? Id unde laborum nesciunt
+                    sapiente sunt!</p>
+            </div>
+
+            <div class="footer-card">
+                <h3>Redes sociales</h3>
+                <nav class="social-media">
+                    <a href="#" class="fab fa-facebook-square" title="Facebook" target="_blank"></a>
+                    <a href="#" class="fab fa-twitter" title="Twitter" target="_blank"></a>
+                    <a href="#" class="fab fa-youtube" title="Youtube" target="_blank"></a>
+                    <a href="#" class="fab fa-instagram" title="Instagram" target="_blank"></a>
+                </nav>
+            </div>
+        </div>
+
+        <p class="footer-copyright">GDLWEBCAMP 2021. Todos los derechos reservados &copy;</p>
+    </footer>
+
+    <!--  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/animateNumber.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
